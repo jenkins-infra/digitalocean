@@ -1,0 +1,94 @@
+random_string.suffix: Refreshing state... [id=ENRZrfwf]
+aws_iam_policy.updatecli: Refreshing state... [id=arn:aws:iam::200564066411:policy/updatecli]
+aws_security_group.ec2_agents_release: Refreshing state... [id=sg-05a12452f33c73d64]
+aws_security_group.ec2_agents_infraci: Refreshing state... [id=sg-0371c18c6435745f0]
+module.vpc.aws_vpc.this[0]: Refreshing state... [id=vpc-0a17ee895d5f631db]
+aws_kms_key.eks: Refreshing state... [id=17b39498-bea2-4d1e-94b2-a55dca525ec8]
+aws_iam_policy.jenkins_ec2_agents: Refreshing state... [id=arn:aws:iam::200564066411:policy/jenkins_ec2_agents]
+aws_key_pair.ec2_agents["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCl6d/p2IRynzsvGkJKZWxtA7j6wru0DTPMARfPzq0udgGkrVImw8b6wPcD5GNT+g6u5ND08pNpdnslF6V7jS65xo1OXGKhQulVJi5ixcMJCgW2NHwdtr4RPujn5aU5YzsAxfRxfb6KVObbUqAQdjGS4Xyr5IMvzXnkG1xO+UvBRV9EEmN1cqyFeSHO3tD3UfkNsgSWyS+SR3elyXpc24VTi5O9KsvDHtP8DknGf90JydPiCLzK8ZJj7l9SxYWrsFL/w2gxc3pA819+i9kxr5ZK7RGd386xSDeAu7z0761C0WiYvN9pmOU8VfYdMQu7w1KVmqA77ybcfBLyQ+2TMsoPSlPOAS7NsoNlIqvE4+EkAtZhBNJfK2em9nzjYZLSuoPGty4NabCPgmTnXwAFwXSjMpwDrOpRuxjW9fXbxFT3LjGq2jU3Kjmh+2hoRvX1Xfrtk5TWgKm2t8CQeriLBi7aoLiRdPuDSuQUP2/Ucp5htEXkInB5cp/L1OUu6NrGiPDObG91BZA+u8HncuRFYgOVr3gjvzwO80HzEUQBjeaJo9Eop4bRe4jCxnBbpbYCIKA64G4boQ74ltSgcmR5cpsWDA8mFoHmzkB+ynDXSUJTOCC3SvLKtiHGF9KxErs8GfhteSx2WHbit9mb6+WWT68f4T5M3Ksx8tyU6OmHr1uENw== jenkins-infra@jenkins.io # ci.jenkins.io"]: Refreshing state... [id=ec2_agents_ci.jenkins.io]
+aws_key_pair.ec2_agents["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCyqFXgoSBl7jmQp56FK3d/qocnNvot/R9dF0UwfmTNJ1DkdA9vVYcXwz9M72K+rkT5vkd+VSsNjTBcfhynxeX69yX7j+Ao9nmd7ImaIyhgI3NVjE8F6VBr9IAlvt/+IY/nLP9clCRAzA5T5QCHFlZQW9bnHJ9DmTfICFGlwRaY/t58c3gz7oLOLFejeAqz0PHdwhieWJgfYQP3rPDXttPxlPw0mkIDwHQfLJV/HOFAbfAd7v/zF5VoSPTGoVHerwKoRQital2+6sY0j5LQUO1kqLaNQi1sh04QweIxZeti8+Q4qn0hOdJlbmaekT7jtG1j/D1omohDOSCjYSiiffaaDUZKW1waL03aHnc5ptNKAv7GE7fbgubYHCu61IuXAXQG5XOcbbeDk55UlzP4G8/nTF1xuD+yXhXM2aQVd6nGlHFpGgVnctWfVPPxTE6OZ3FRY7zfC13TF9Irh+xENkql7TF5j9ho3yo9o4xpgmMNvgkvYiAO5ypy74aMSbJ/vkjvVM1y88rKgVVdWWDW9EojAobCP7mPfYMEnM57hHDKrzYLNZgbU8Rgjpt2X8uIb+D+kRZ7IVFAadE0A+7/JzfWyHxNk6b5gXxJKRVOg6TYn979y3b1qzObYqaa10no1YtzVt5OKWNdfnCow4u4ovsrIZuOxELhUD6A9LBhyP9ELw== jenkins-infra@jenkins.io # release.ci.jenkins.io"]: Refreshing state... [id=ec2_agents_release.ci.jenkins.io]
+aws_key_pair.ec2_agents["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDYlEZmGs43NHtJysZpSJX/THB2JBcCP0o+8ijJVAADhzuRYE5Jdd+dwdCWyGzGc8r2pxdw+1l3NHHkhRqTWIgH9h77VLnavrqDf6dTuC05q4RTBw5E6AknKB3L0a4IzpXtvT+MbdkkJaNEFWpK63oGSxbO2kaTUXzYiJg/BnpMo8gKyeF1t1RBZ249xgWqmb4SDkM7hOLC7HF8rJjHXNFvhBAm99aWwr0MhFwmEp6fRAiI5AC52owIewXN9dkXs8oMXjQ4J6g7dO5Vwdu2M19Uk0DbaqEJmngoSYtOikpkFSlnJO3iOqYUXh6uEZLd1OjZbxbcvnmxMlI6UfKkVaKGWzLb6G8yz+Ahz9oxKmq11QsUoMedHZlwHNgPpJ+TS3p5TlDZYGsuVRm7EnMN0+KecXzoZk6i/kJO+uQ0oMxdtZCYVlwdTiOW/85WqB7lSVokIWAkRmV89kHEbgSJLgrH9aXr4xw2jhzN+F9HT2Z5mOoVU3Exkursu/bXhdocIhdtXQVBDIA0hcvouUGar6Db7VK6NQeJoAWUVVELhBZP+rGhbg5WjGZANPPi01VMIDhks5KXZt0AtaQxpZCaynbasm0g7fHvy+BP3bTQcpa95hBWYL0tjon5BPLTkzK4q282pQluba0bralLDgF0SoNw4F83w/hu7YwHMoSC9Njzcw== jenkins-infra@jenkins.io # infra.ci.jenkins.io"]: Refreshing state... [id=ec2_agents_infra.ci.jenkins.io]
+aws_key_pair.ec2_agents["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDJBYCE0febAONYx1LhC4YchyV1k+Icte8kg0wKSkjB3lEUTCTzPG5/oUrbGj3rkFeDRSXeVCjTpjk45LeZ2+NWjQrHDv9GZcN95K/JDYDhFPizz2nFmwajbIb+0xa37Vy44+x4I94F+Blnba0xA3uILGI3w5FJZAW+m+h+T0SoInGiRJp1DFYi8RQO+G1bEf0+ndyYBFnuLJRQyMAK21JMtA2aADoV37lzqxxgGfCtup2BITZX4bPipG35t1Fplagj5CsMAMqDxgXk2dsCKAQxEtsWSlRi1K9+x3SXubORg3Z+Xs26YZYb5N9K4dQj2FnNFpSJ7kZNj3A3cPv1MT8+632WfxgFkgbSQNP0+KutAFr6EZAh49WxoL/gvwU3OD4FL2J4SQ3XRx1zSkOtbzR6Z63fSM/feptWtoF6Jv6e6w+zIsjzvEalLhdl1ngEiXIJ/V5xneCc8epBQoOCjs9vFwPHwA4z/2iDS7CYsrL8uX1arf3hMI2b+FYWoITUpWYi4rOv4y9zkwHfPOJizUHrc/jwtFHrJ3JtHhVqGDnj/mcdnlwGIja7uQ0XlQKF1+kwRpWOPrRJoFgZ/j+RJkUZ+u8YSVZ7KwHI2YlxbBQiLMoFy6bh8XP/nooV+mo1uQDoZsc6mSz+kiKL2Rg/DuyhFumoSkY0WeBnyiGn4//ecw== jenkins-infra@jenkins.io # trusted.ci.jenkins.io"]: Refreshing state... [id=ec2_agents_trusted.ci.jenkins.io]
+module.eks.aws_iam_role.cluster[0]: Refreshing state... [id=jenkins-infra-eks-ENRZrfwf20211008085247746900000004]
+module.eks.aws_iam_policy.cluster_elb_sl_role_creation[0]: Refreshing state... [id=arn:aws:iam::200564066411:policy/jenkins-infra-eks-ENRZrfwf-elb-sl-role-creation20211008085247746700000001]
+module.eks.aws_iam_policy.cluster_deny_log_group[0]: Refreshing state... [id=arn:aws:iam::200564066411:policy/jenkins-infra-eks-ENRZrfwf-deny-log-group20211125094838140600000001]
+aws_iam_user_policy_attachment.allow_updatecli_read_ec2: Refreshing state... [id=updatecli-arn:aws:iam::200564066411:policy/updatecli]
+module.vpc.aws_eip.nat[0]: Refreshing state... [id=eipalloc-0e7ab232c42509bf3]
+aws_iam_user_policy_attachment.allow_ec2_on_ci: Refreshing state... [id=jenkins-ci-20211029140131467300000001]
+aws_iam_user_policy_attachment.allow_ec2_on_infraci: Refreshing state... [id=jenkins-infra-ci-arn:aws:iam::200564066411:policy/jenkins_ec2_agents]
+module.eks.aws_iam_role_policy_attachment.cluster_AmazonEKSServicePolicy[0]: Refreshing state... [id=jenkins-infra-eks-ENRZrfwf20211008085247746900000004-20211008085250559600000006]
+module.eks.aws_iam_role_policy_attachment.cluster_AmazonEKSVPCResourceControllerPolicy[0]: Refreshing state... [id=jenkins-infra-eks-ENRZrfwf20211008085247746900000004-20211008085250646100000008]
+module.eks.aws_iam_role_policy_attachment.cluster_deny_log_group[0]: Refreshing state... [id=jenkins-infra-eks-ENRZrfwf20211008085247746900000004-20211125094838600800000002]
+module.eks.aws_iam_role_policy_attachment.cluster_elb_sl_role_creation[0]: Refreshing state... [id=jenkins-infra-eks-ENRZrfwf20211008085247746900000004-20211008085250564200000007]
+module.eks.aws_iam_role_policy_attachment.cluster_AmazonEKSClusterPolicy[0]: Refreshing state... [id=jenkins-infra-eks-ENRZrfwf20211008085247746900000004-20211008085250549100000005]
+aws_security_group.all_worker_mgmt: Refreshing state... [id=sg-078a8bccf8b8f714f]
+module.vpc.aws_internet_gateway.this[0]: Refreshing state... [id=igw-09ddaeb7c7805c128]
+module.vpc.aws_subnet.public[0]: Refreshing state... [id=subnet-08d5d75484ad0b7c1]
+module.vpc.aws_subnet.public[1]: Refreshing state... [id=subnet-03f3f5c43b4e312df]
+module.vpc.aws_route_table.private[0]: Refreshing state... [id=rtb-03d3dcf206c4cfc4d]
+module.vpc.aws_subnet.public[2]: Refreshing state... [id=subnet-0439f1b3505a86064]
+module.vpc.aws_subnet.private[1]: Refreshing state... [id=subnet-099fb29bc5de12928]
+module.vpc.aws_subnet.private[2]: Refreshing state... [id=subnet-00b6f0ab81bd1ddd7]
+module.vpc.aws_subnet.private[0]: Refreshing state... [id=subnet-054ea8e68ad3085a4]
+module.vpc.aws_route_table.public[0]: Refreshing state... [id=rtb-0b280e26b3d381fe5]
+module.eks.aws_security_group.cluster[0]: Refreshing state... [id=sg-051e90d3a7e6f260b]
+module.eks.aws_security_group.workers[0]: Refreshing state... [id=sg-04a5b1153a1e9f7ad]
+module.vpc.aws_route.public_internet_gateway[0]: Refreshing state... [id=r-rtb-0b280e26b3d381fe51080289494]
+module.vpc.aws_route_table_association.private[0]: Refreshing state... [id=rtbassoc-0d682101302edab12]
+module.vpc.aws_route_table_association.private[2]: Refreshing state... [id=rtbassoc-05f7982d893107591]
+module.vpc.aws_route_table_association.private[1]: Refreshing state... [id=rtbassoc-011bb04166defa70d]
+module.vpc.aws_route_table_association.public[0]: Refreshing state... [id=rtbassoc-07b0b220b551ef8a9]
+module.vpc.aws_route_table_association.public[2]: Refreshing state... [id=rtbassoc-00747fe76d371e87e]
+module.vpc.aws_route_table_association.public[1]: Refreshing state... [id=rtbassoc-05fc99a7dd80817a1]
+module.vpc.aws_nat_gateway.this[0]: Refreshing state... [id=nat-0b800d274390b1772]
+module.eks.aws_security_group_rule.cluster_egress_internet[0]: Refreshing state... [id=sgrule-2108287373]
+module.eks.aws_security_group_rule.cluster_https_worker_ingress[0]: Refreshing state... [id=sgrule-2489913719]
+module.eks.aws_security_group_rule.workers_ingress_cluster_https[0]: Refreshing state... [id=sgrule-1849579201]
+module.eks.aws_security_group_rule.workers_ingress_self[0]: Refreshing state... [id=sgrule-3113431784]
+module.eks.aws_security_group_rule.workers_ingress_cluster[0]: Refreshing state... [id=sgrule-856256134]
+module.eks.aws_security_group_rule.workers_egress_internet[0]: Refreshing state... [id=sgrule-2221053843]
+module.vpc.aws_route.private_nat_gateway[0]: Refreshing state... [id=r-rtb-03d3dcf206c4cfc4d1080289494]
+module.eks.aws_eks_cluster.this[0]: Refreshing state... [id=jenkins-infra-eks-ENRZrfwf]
+module.eks.aws_iam_openid_connect_provider.oidc_provider[0]: Refreshing state... [id=arn:aws:iam::200564066411:oidc-provider/oidc.eks.us-east-2.amazonaws.com/id/C0875C758FF3F886B58DD3B1046EC281]
+module.eks.aws_iam_role.workers[0]: Refreshing state... [id=jenkins-infra-eks-ENRZrfwf20211008090346032700000009]
+module.iam_assumable_role_admin.aws_iam_role.this[0]: Refreshing state... [id=cluster-autoscaler]
+aws_iam_policy.cluster_autoscaler: Refreshing state... [id=arn:aws:iam::200564066411:policy/cluster-autoscaler2021100809034648160000000a]
+module.iam_assumable_role_admin.aws_iam_role_policy_attachment.custom[0]: Refreshing state... [id=cluster-autoscaler-2021100809034871150000000d]
+module.eks.aws_iam_role_policy_attachment.workers_AmazonEKSWorkerNodePolicy[0]: Refreshing state... [id=jenkins-infra-eks-ENRZrfwf20211008090346032700000009-2021100809034871150000000f]
+module.eks.aws_iam_role_policy_attachment.workers_AmazonEKS_CNI_Policy[0]: Refreshing state... [id=jenkins-infra-eks-ENRZrfwf20211008090346032700000009-2021100809034870580000000c]
+module.eks.aws_iam_role_policy_attachment.workers_AmazonEC2ContainerRegistryReadOnly[0]: Refreshing state... [id=jenkins-infra-eks-ENRZrfwf20211008090346032700000009-2021100809034871150000000e]
+module.eks.aws_iam_instance_profile.workers[0]: Refreshing state... [id=jenkins-infra-eks-ENRZrfwf2021100809034819530000000b]
+module.eks.aws_iam_instance_profile.workers_launch_template[0]: Refreshing state... [id=jenkins-infra-eks-ENRZrfwf20211105182355700700000002]
+module.eks.aws_launch_configuration.workers[0]: Refreshing state... [id=jenkins-infra-eks-ENRZrfwf-tiny-ondemand-linux20211125102635504400000003]
+module.eks.kubernetes_config_map.aws_auth[0]: Refreshing state... [id=kube-system/aws-auth]
+module.eks.aws_launch_template.workers_launch_template[0]: Refreshing state... [id=lt-04206e5a4b1af688c]
+module.eks.aws_autoscaling_group.workers[0]: Refreshing state... [id=jenkins-infra-eks-ENRZrfwf-tiny-ondemand-linux20211105194656771800000002]
+module.eks.aws_autoscaling_group.workers_launch_template[0]: Refreshing state... [id=jenkins-infra-eks-ENRZrfwf-spot-linux-4xlarge20211105182356482400000006]
+
+Note: Objects have changed outside of Terraform
+
+Terraform detected the following changes made outside of Terraform since the
+last "terraform apply":
+
+  # module.eks.aws_autoscaling_group.workers_launch_template[0] has been changed
+  ~ resource "aws_autoscaling_group" "workers_launch_template" {
+      ~ desired_capacity          = 3 -> 4
+        id                        = "jenkins-infra-eks-ENRZrfwf-spot-linux-4xlarge20211105182356482400000006"
+        name                      = "jenkins-infra-eks-ENRZrfwf-spot-linux-4xlarge20211105182356482400000006"
+        # (22 unchanged attributes hidden)
+
+
+        # (8 unchanged blocks hidden)
+    }
+
+Unless you have made equivalent changes to your configuration, or ignored the
+relevant attributes using ignore_changes, the following plan may include
+actions to undo or respond to these changes.
+
+─────────────────────────────────────────────────────────────────────────────
+
+No changes. Your infrastructure matches the configuration.
+
+Your configuration already matches the changes detected above. If you'd like
+to update the Terraform state to match, create and apply a refresh-only plan:
+  terraform apply -refresh-only
