@@ -1,9 +1,9 @@
-
 terraform {
-  required_version = ">= 1.0, <1.1"
+  required_version = ">= 1.0, <1.2"
   required_providers {
-    aws = {
-      source = "hashicorp/aws"
+    digitalocean = {
+      source = "digitalocean/digitalocean"
+      version = "1.22.2"
     }
     local = {
       source = "hashicorp/local"

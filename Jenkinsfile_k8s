@@ -28,7 +28,7 @@ pipeline {
             script {
               withCredentials([string(credentialsId: 'updatecli-github-token', variable: 'UPDATECLI_GITHUB_TOKEN')]) {
                 updatecli(action: 'diff')
-                if (env.BRANCH_NAME == 'main') {
+                if (env.BRANCH_IS_PRIMARY) {
                   updatecli(action: 'apply', cronTriggerExpression: '@daily')
                 }
               }
@@ -78,9 +78,9 @@ pipeline {
             }
           }
           environment {
-            AWS_ACCESS_KEY_ID = credentials("production-terraform-access-key")
-            AWS_SECRET_ACCESS_KEY = credentials("production-terraform-secret-key")
-            BACKEND_CONFIG_FILE = credentials("production-terraform-backend-config")
+            // AWS_ACCESS_KEY_ID = credentials("production-terraform-access-key")
+            // AWS_SECRET_ACCESS_KEY = credentials("production-terraform-secret-key")
+            // BACKEND_CONFIG_FILE = credentials("production-terraform-backend-config")
           }
           stages {
             stage('🦅 Generate Terraform Plan') {
