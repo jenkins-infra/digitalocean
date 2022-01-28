@@ -3,11 +3,6 @@ data "digitalocean_kubernetes_versions" "k8s" {
 }
 
 data "digitalocean_sizes" "k8s" {
-  # filter {
-  #   key    = "slug"
-  #   values = [var.size]
-  # }
-
   filter {
     key    = "regions"
     values = [var.region]
