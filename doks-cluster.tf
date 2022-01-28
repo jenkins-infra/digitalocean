@@ -1,7 +1,6 @@
 resource "digitalocean_kubernetes_cluster" "doks_cluster" {
   name         = local.cluster_name
   region       = var.region
-  // TODO: mark as ignored by terraform plan
   version      = local.doks_version
   auto_upgrade = var.auto_upgrade
   lifecycle {
