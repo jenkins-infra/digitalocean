@@ -1,7 +1,19 @@
 resource "digitalocean_kubernetes_cluster" "doks_cluster" {
-  name    = local.cluster_name
-  region  = var.region
-  version = local.doks_version
+  name         = local.cluster_name
+  region       = var.region
+  // TODO: mark as ignored by terraform plan
+  version      = local.doks_version
+  auto_upgrade = var.auto_upgrade
+  lifecycle {
+    ignore_changes = [
+      version
+    ]
+  }
+
+  maintenance_policy {
+    start_time = var.maintenance_policy_start_time
+    day        = var.maintenance_policy_day
+  }
 
   # Small node pool without autoscalling.
   # As we can't scale to 0 with DO, we're setting up 2 node pools:
@@ -12,12 +24,6 @@ resource "digitalocean_kubernetes_cluster" "doks_cluster" {
     size       = local.minimal_node_pool_size
     auto_scale = false
     node_count = 1
-    tags       = ["node-pool-minimal"]
-  }
-
-  maintenance_policy {
-    count       = var.auto_upgrade ? 1 : 0
-    start_time  = var.maintenance_policy_start_time
-    day         = var.maintenance_policy_day
+    tags       = ["node-pool-minimal", local.cluster_name]
   }
 }

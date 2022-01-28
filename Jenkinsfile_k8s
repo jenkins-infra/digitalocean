@@ -49,9 +49,8 @@ pipeline {
             }
           }
           environment {
-            AWS_ACCESS_KEY_ID = credentials("ci-terraform-access-key")
-            AWS_SECRET_ACCESS_KEY = credentials("ci-terraform-secret-key")
-            BACKEND_CONFIG_FILE = credentials("ci-terraform-backend-config")
+            DIGITALOCEAN_PAT = credentials("ci-digitalocean-pat")
+            BACKEND_CONFIG_FILE = credentials("ci-digitalocean-terraform-backend-config")
           }
           stages {
             stage('🧹 Prepare Terraform for Staging Environment') {
@@ -78,9 +77,8 @@ pipeline {
             }
           }
           environment {
-            // AWS_ACCESS_KEY_ID = credentials("production-terraform-access-key")
-            // AWS_SECRET_ACCESS_KEY = credentials("production-terraform-secret-key")
-            // BACKEND_CONFIG_FILE = credentials("production-terraform-backend-config")
+            DIGITALOCEAN_PAT = credentials("production-digitalocean-pat")
+            BACKEND_CONFIG_FILE = credentials("production-digitalocean-terraform-backend-config")
           }
           stages {
             stage('🦅 Generate Terraform Plan') {

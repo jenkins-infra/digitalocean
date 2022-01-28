@@ -32,7 +32,3 @@ data "digitalocean_sizes" "k8s" {
 output "dok8s-versions" {
   value = data.digitalocean_kubernetes_versions.k8s.valid_versions
 }
-
-# output "sizes" {
-#   value = data.digitalocean_sizes.k8s
-# }

@@ -1,15 +1,12 @@
 terraform {
-  required_version = ">= 1.0, <1.2"
+  required_version = ">= 1.0, <1.1"
   required_providers {
     digitalocean = {
       source = "digitalocean/digitalocean"
-      version = "1.22.2"
+      version = "2.16.0"
     }
     local = {
       source = "hashicorp/local"
-    }
-    kubernetes = {
-      source = "hashicorp/kubernetes"
     }
   }
 }

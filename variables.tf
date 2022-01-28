@@ -12,7 +12,7 @@ variable "kubernetes_version" {
 
 variable "autoscaled_node_pool_size" {
   type        = string
-  default     = "s-4vcpu-4gb"
+  default     = "s-2vcpu-4gb"
   description = "Autoscaled node pool size (available sizes: `doctl compute size list`)"
 }
 
