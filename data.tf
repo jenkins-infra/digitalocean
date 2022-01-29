@@ -7,7 +7,6 @@ data "digitalocean_sizes" "k8s" {
     key    = "regions"
     values = [var.region]
   }
-
 }
 
 output "dok8s-versions" {

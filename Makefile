@@ -1,4 +1,3 @@
-
 # Disable CGO to avoid error "cgo: exec /missing-cc: fork/exec /missing-cc: no such file or directory"
 # Ref. https://golang.org/cmd/cgo/
 export CGO_ENABLED=0
