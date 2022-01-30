@@ -25,6 +25,8 @@ tests: .terraform/plugins/selections.json lint-tests ## Execute the test harness
 	@go test -v -timeout 30m ./tests/
 
 plan: lint .terraform/plugins/selections.json ## Deploy (apply) the terraform changes to production
+	@ls
+	@cat $(BACKEND_CONFIG_FILE)
 	@terraform plan -compact-warnings -lock=false -no-color > terraform-plan-for-humans.txt
 	@echo "Terraform plan output can be checked under the file ./terraform-plan-for-humans.txt"
 

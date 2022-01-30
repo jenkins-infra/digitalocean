@@ -23,18 +23,18 @@ variable "autoscaled_node_pool_max_nodes" {
 }
 
 variable "auto_upgrade" {
-  type = bool
-  default = false
+  type        = bool
+  default     = false
   description = "Activate Digital Ocean cluster auto-upgrade for path versions"
-} 
+}
 
-variable maintenance_policy_start_time {
+variable "maintenance_policy_start_time" {
   type        = string
   default     = "04:00"
   description = "Auto-upgrade maintenance policy start time"
 }
 
-variable maintenance_policy_day {
+variable "maintenance_policy_day" {
   type        = string
   default     = "sunday"
   description = "Auto-upgrade maintenance policy start time"
