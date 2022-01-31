@@ -30,7 +30,7 @@ func TestTerraformEksCluster(t *testing.T) {
 	uniqueId := random.UniqueId()
 	workpaceName := fmt.Sprintf("terratest-%s", uniqueId)
 
-	// Revert workspace to initial status
+	// Revert workspace to its initial status
 	defer func() {
 		// Clean up resources
 		terraform.Destroy(t, terraformOptions)
