@@ -2,7 +2,7 @@
 # Ref. https://golang.org/cmd/cgo/
 export CGO_ENABLED=0
 
-BACKEND_CONFIG_FILE ?= ./backend-config
+BACKEND_CONFIG_FILE ?= $(CURDIR)/backend-config
 
 help: ## Show this Makefile's help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -18,11 +18,11 @@ lint: ## Lint the project files
 	@terraform fmt -recursive -check
 
 lint-tests: ## Lint the testings files
-	@test -z "$(go fmt -l ./tests/)"
-	@golangci-lint run ./tests/
+	@test -z "$(go fmt -l $(CURDIR)/tests/)"
+	@cd $(CURDIR)/tests/ && golangci-lint run
 
 tests: .terraform/plugins/selections.json lint-tests ## Execute the test harness
-	@go test -v -timeout 30m ./tests/
+	@cd $(CURDIR)/tests/ && go test -v -timeout 30m
 
 plan: lint .terraform/plugins/selections.json ## Deploy (apply) the terraform changes to production
 	@terraform plan -compact-warnings -lock=false -no-color > terraform-plan-for-humans.txt
