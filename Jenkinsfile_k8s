@@ -54,13 +54,9 @@ pipeline {
             AWS_SECRET_ACCESS_KEY = credentials("ci-terraform-secret-key")
             TF_VAR_do_token = credentials("ci-digitalocean-pat")
             BACKEND_CONFIG_FILE = credentials("ci-terraform-backend-config")
+            BACKEND_CONFIG_NAMESPACE = "doks-terraform.tfstate"
           }
           stages {
-            stage('🩹 Change the backend-config key') {
-              steps {
-                sh 'sed -i -E \'s/$key.*=.*/key = doks-terraform.tfstate/\' ${BACKEND_CONFIG_FILE}'
-              }
-            }
             stage('🧹 Prepare Terraform for Staging Environment') {
               steps {
                 sh 'make prepare'
@@ -90,13 +86,9 @@ pipeline {
             AWS_SECRET_ACCESS_KEY = credentials("production-terraform-secret-key")
             TF_VAR_do_token = credentials("production-digitalocean-pat")
             BACKEND_CONFIG_FILE = credentials("production-terraform-backend-config")
+            BACKEND_CONFIG_NAMESPACE = "doks-terraform.tfstate"
           }
           stages {
-            stage('🩹 Change the backend-config key') {
-              steps {
-                sh 'sed -i -E \'s/$key.*=.*/key = doks-terraform.tfstate/\'  ${BACKEND_CONFIG_FILE}'
-              }
-            }
             stage('🦅 Generate Terraform Plan') {
               environment {
                 // When the job is triggered by the daily cron timer, then the plan succeed only if there is no changes found (e.g. no config drift)
