@@ -50,11 +50,10 @@ pipeline {
           }
           environment {
             // Access to the S3 bucket where the backend-config is stored
-            AWS_ACCESS_KEY_ID = credentials("ci-terraform-access-key")
-            AWS_SECRET_ACCESS_KEY = credentials("ci-terraform-secret-key")
-            TF_VAR_do_token = credentials("ci-digitalocean-pat")
-            BACKEND_CONFIG_FILE = credentials("ci-terraform-backend-config")
-            BACKEND_CONFIG_NAMESPACE = "doks-terraform.tfstate"
+            AWS_ACCESS_KEY_ID = credentials("ci-terraform-aws-access-key")
+            AWS_SECRET_ACCESS_KEY = credentials("ci-terraform-aws-secret-key")
+            TF_VAR_do_token = credentials("ci-terraform-digitalocean-pat")
+            BACKEND_CONFIG_FILE = credentials("ci-terraform-digitalocean-backend-config")
           }
           stages {
             stage('🧹 Prepare Terraform for Staging Environment') {
@@ -82,11 +81,10 @@ pipeline {
           }
           environment {
             // Access to the S3 bucket where the backend-config is stored
-            AWS_ACCESS_KEY_ID = credentials("production-terraform-access-key")
-            AWS_SECRET_ACCESS_KEY = credentials("production-terraform-secret-key")
-            TF_VAR_do_token = credentials("production-digitalocean-pat")
-            BACKEND_CONFIG_FILE = credentials("production-terraform-backend-config")
-            BACKEND_CONFIG_NAMESPACE = "doks-terraform.tfstate"
+            AWS_ACCESS_KEY_ID = credentials("production-terraform-aws-access-key")
+            AWS_SECRET_ACCESS_KEY = credentials("production-terraform-aws-secret-key")
+            TF_VAR_do_token = credentials("production-terraform-digitalocean-pat")
+            BACKEND_CONFIG_FILE = credentials("production-terraform-digitalocean-backend-config")
           }
           stages {
             stage('🦅 Generate Terraform Plan') {
