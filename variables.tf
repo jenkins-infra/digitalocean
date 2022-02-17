@@ -12,13 +12,13 @@ variable "kubernetes_version" {
 
 variable "autoscaled_node_pool_size" {
   type        = string
-  default     = "s-2vcpu-4gb"
+  default     = "c-16" # CPU optimized, 16vCPU/32GB (at 2022/02/17)
   description = "Autoscaled node pool size (available sizes: `doctl compute size list`)"
 }
 
 variable "autoscaled_node_pool_max_nodes" {
   type        = number
-  default     = 2
+  default     = 10
   description = "Autoscaled node pool max nodes count"
 }
 
