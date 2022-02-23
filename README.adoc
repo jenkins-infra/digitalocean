@@ -29,7 +29,7 @@ git submodule update --init --recursive
 
 IMPORTANT: Don't blindly execute the terraform code located in this repository on your own account as it may lead your account bill to significantly increase.
 
-Once you've fulfilled the <<Requirements>>, you may execute any command from {shared_tools_repo_url}/blob/main/terraform/README.adoc#available-commands by adding the correct flag `--directory` pointing to `.shared-tools/terraform/`:
+Once you've fulfilled the <<Requirements>>, you may execute link:{shared_tools_repo_url}/blob/main/terraform/README.adoc#available-commands[any of the available commands] by adding the correct flag `--directory` pointing to `.shared-tools/terraform/`:
 
 [source,bash]
 ----
