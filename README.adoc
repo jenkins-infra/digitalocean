@@ -4,6 +4,7 @@
 :private_repo_url: https://github.com/jenkins-infra/{private_repo_name}
 :shared_tools_repo_name: shared_tools
 :shared_tools_repo_url: https://github.com/jenkins-infra/{shared_tools_repo_name}
+
 This repository hosts the infrastructure-as-code definition for all the link:https://www.digitalocean.com/[Digital Ocean] resources for the link:https://www.jenkins.io/projects/infrastructure/[Jenkins Infrastructure Project].
 
 == Requirements
