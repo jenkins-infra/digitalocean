@@ -15,7 +15,7 @@ This repository hosts the infrastructure-as-code definition for all the link:htt
 ** The content can be retrieved from the outputs of the link:{private_repo_url}[(private) repository {private_repo_name}]
 ** This file (`backend-config`) is git-ignored
 
-* The git command line to allow cloning the repository and its submodule link:link:{shared_tools_repo_url}[{shared_tools_repo_name}]
+* The git command line to allow cloning the repository and its submodule link:{shared_tools_repo_url}[{shared_tools_repo_name}]
 ** This repository has [submodules](https://git-scm.com/docs/git-submodule). Once you cloned the repository, execute the following command to retrieve the shared tools:
 
 [source,bash]
