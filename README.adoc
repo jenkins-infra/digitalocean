@@ -2,7 +2,7 @@
 :toc:
 :private_repo_name: terraform-states
 :private_repo_url: https://github.com/jenkins-infra/{private_repo_name}
-:shared_tools_repo_name: shared_tools
+:shared_tools_repo_name: shared-tools
 :shared_tools_repo_url: https://github.com/jenkins-infra/{shared_tools_repo_name}
 
 This repository hosts the infrastructure-as-code definition for all the link:https://www.digitalocean.com/[Digital Ocean] resources for the link:https://www.jenkins.io/projects/infrastructure/[Jenkins Infrastructure Project].
@@ -16,7 +16,7 @@ This repository hosts the infrastructure-as-code definition for all the link:htt
 ** This file (`backend-config`) is git-ignored
 
 * The git command line to allow cloning the repository and its submodule link:{shared_tools_repo_url}[{shared_tools_repo_name}]
-** This repository has [submodules](https://git-scm.com/docs/git-submodule). Once you cloned the repository, execute the following command to retrieve the shared tools:
+** This repository has link:https://git-scm.com/docs/git-submodule[submodules]. Once you cloned the repository, execute the following command to retrieve the shared tools:
 
 [source,bash]
 ----
@@ -29,7 +29,7 @@ git submodule update --init --recursive
 
 IMPORTANT: Don't blindly execute the terraform code located in this repository on your own account as it may lead your account bill to significantly increase.
 
-Once you've fulfilled the <<Requirements>>, you may execute any command from {shared_tools_repo_url}/blob/main/terraform/README.adoc#available-commands by adding the correct flag `--directory` pointing to `.shared-tools/terraform/`:
+Once you've fulfilled the <<Requirements>>, you may execute link:{shared_tools_repo_url}/blob/main/terraform/README.adoc#available-commands[any of the available commands] by adding the correct flag `--directory` pointing to `.shared-tools/terraform/`:
 
 [source,bash]
 ----
