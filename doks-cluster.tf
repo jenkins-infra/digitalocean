@@ -1,8 +1,9 @@
 resource "digitalocean_kubernetes_cluster" "doks_cluster" {
-  name         = local.cluster_name
-  region       = var.region
-  version      = local.doks_version
-  auto_upgrade = var.auto_upgrade
+  name          = local.cluster_name
+  region        = var.region
+  version       = local.doks_version
+  auto_upgrade  = var.auto_upgrade
+  surge_upgrade = true
   lifecycle {
     ignore_changes = [
       version
