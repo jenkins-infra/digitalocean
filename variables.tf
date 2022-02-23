@@ -24,7 +24,7 @@ variable "autoscaled_node_pool_max_nodes" {
 
 variable "auto_upgrade" {
   type        = bool
-  default     = false
+  default     = true
   description = "Activate Digital Ocean cluster auto-upgrade for path versions"
 }
 
