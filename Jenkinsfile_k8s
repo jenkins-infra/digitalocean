@@ -5,8 +5,8 @@ parallel(
   'terraform': {
     terraform(
       stagingCredentials: [
-        string(variable: 'TF_VAR_do_token', credentialsId:'ci-terraform-digitalocean-pat'),
-        file(variable: 'BACKEND_CONFIG_FILE', credentialsId: 'ci-terraform-digitalocean-backend-config'),
+        string(variable: 'TF_VAR_do_token', credentialsId:'staging-terraform-digitalocean-pat'),
+        file(variable: 'BACKEND_CONFIG_FILE', credentialsId: 'staging-terraform-digitalocean-backend-config'),
       ],
       productionCredentials: [
         string(variable: 'TF_VAR_do_token', credentialsId:'production-terraform-digitalocean-pat'),
