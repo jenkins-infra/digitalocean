@@ -6,4 +6,11 @@ resource "digitalocean_kubernetes_node_pool" "autoscaled-pool" {
   min_nodes  = 1
   max_nodes  = var.autoscaled_node_pool_max_nodes
   tags       = ["node-pool-autoscaled", local.cluster_name]
+  lifecycle {
+    ignore_changes = [
+      node_count,
+      actual_node_count,
+      nodes,
+    ]
+  }
 }
