@@ -6,8 +6,8 @@ variable "region" {
 
 variable "kubernetes_version" {
   type        = string
-  default     = "1.20."
-  description = "Kubernetes version in format '<MINOR>.<MINOR>.'"
+  default     = "1.21."
+  description = "Kubernetes version in format '<MAJOR>.<MINOR>.'"
 }
 
 variable "autoscaled_node_pool_size" {
