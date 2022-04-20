@@ -4,7 +4,7 @@ resource "digitalocean_kubernetes_cluster" "doks_cluster" {
   version       = local.doks_version
   auto_upgrade  = var.auto_upgrade
   surge_upgrade = true
-  tags          = ["managed-by", "terraform"]
+  tags          = ["managed-by:terraform"]
   lifecycle {
     ignore_changes = [
       version,
