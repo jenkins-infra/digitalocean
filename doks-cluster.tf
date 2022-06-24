@@ -7,7 +7,6 @@ resource "digitalocean_kubernetes_cluster" "doks_cluster" {
   tags          = ["managed-by:terraform"]
   lifecycle {
     ignore_changes = [
-      version,
       updated_at,
     ]
   }
