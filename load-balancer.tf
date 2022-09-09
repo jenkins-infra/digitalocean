@@ -6,10 +6,10 @@ resource "digitalocean_loadbalancer" "ingress_load_balancer" {
 
   forwarding_rule {
     entry_port     = 80
-    entry_protocol = "http"
+    entry_protocol = "http" #tfsec:ignore:digitalocean-compute-enforce-https
 
     target_port     = 80
-    target_protocol = "http"
+    target_protocol = "http" #tfsec:ignore:digitalocean-compute-enforce-https
   }
 
   // We define a temporary forwarding rule, since it’s necessary to create the load balancer,
