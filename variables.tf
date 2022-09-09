@@ -40,8 +40,8 @@ variable "maintenance_policy_day" {
   description = "Auto-upgrade maintenance policy start time"
 }
 
-variable "top_level_domains" {
-  description = "Top level domains to create records and pods for"
+variable "domain_name" {
+  description = "Domain to create records and pods for"
   default     = ["do.jenkins.io"]
-  type        = list(string)
+  type        = string
 }
