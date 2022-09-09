@@ -39,3 +39,9 @@ variable "maintenance_policy_day" {
   default     = "sunday"
   description = "Auto-upgrade maintenance policy start time"
 }
+
+variable "domain_name" {
+  description = "Domain to create records and pods for"
+  default     = "do.jenkins.io"
+  type        = string
+}
