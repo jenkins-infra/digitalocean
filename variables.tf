@@ -42,6 +42,6 @@ variable "maintenance_policy_day" {
 
 variable "domain_name" {
   description = "Domain to create records and pods for"
-  default     = ["do.jenkins.io"]
+  default     = "do.jenkins.io"
   type        = string
 }
