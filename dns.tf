@@ -5,7 +5,7 @@ resource "digitalocean_domain" "top_level_domains" {
 
 resource "digitalocean_record" "a_records" {
   for_each = toset(var.top_level_domains)
-  domain   = each.value.id
+  domain   = each.id
   type     = "A"
   ttl      = 60
   name     = "@"
