@@ -28,6 +28,12 @@ variable "auto_upgrade" {
   description = "Activate Digital Ocean cluster auto-upgrade for path versions"
 }
 
+variable "autoscaled_node_pool_enabled" {
+  type        = bool
+  default     = true
+  description = "Activate autoscaled node pool (useful to disable it when credits are low)"
+}
+
 variable "maintenance_policy_start_time" {
   type        = string
   default     = "04:00"
