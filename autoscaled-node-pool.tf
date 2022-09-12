@@ -1,4 +1,5 @@
 resource "digitalocean_kubernetes_node_pool" "autoscaled-pool" {
+  count      = var.autoscaled_node_pool_enabled ? 1 : 0
   cluster_id = digitalocean_kubernetes_cluster.doks_cluster.id
   name       = "autoscaled-node-pool"
   size       = var.autoscaled_node_pool_size
