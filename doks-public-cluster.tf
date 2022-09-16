@@ -17,14 +17,11 @@ resource "digitalocean_kubernetes_cluster" "doks_public_cluster" {
   }
 
   # Small node pool without autoscalling.
-  # As we can't scale to 0 with DO, we're setting up 2 node pools:
-  # - this one with the minimal size and no heavy usage
-  # - another beefy one with autoscalling enabled, see ./autoscaled-node-pool.tf
   node_pool {
     name       = "minimal-node-pool"
     size       = local.minimal_node_pool_size
     auto_scale = false
-    node_count = 1
+    node_count = local.public_cluster_minimal_node_count
     tags       = ["node-pool-minimal", local.cluster_name]
   }
 }
