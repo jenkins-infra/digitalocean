@@ -1,5 +1,5 @@
 resource "digitalocean_loadbalancer" "ingress_load_balancer" {
-  name      = "${local.cluster_name}-lb"
+  name      = "${local.public_cluster_name}-lb"
   region    = var.region
   size      = "lb-small"
   algorithm = "round_robin"
