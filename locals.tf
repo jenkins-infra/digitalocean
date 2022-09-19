@@ -9,4 +9,5 @@ locals {
   # `doctl kubernetes options versions` doesn't return anything if the minor k8s version isn't supported anymore, note it can fail the build.
   doks_version           = data.digitalocean_kubernetes_versions.k8s.latest_version
   minimal_node_pool_size = "s-1vcpu-2gb" # Available sizes: `doctl compute size list`
+  small_node_pool_size   = "s-2vcpu-4gb" # Available sizes: `doctl compute size list`
 }

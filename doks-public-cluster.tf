@@ -19,7 +19,7 @@ resource "digitalocean_kubernetes_cluster" "doks_public_cluster" {
   # Small node pool with autoscalling
   node_pool {
     name       = "small-node-pool"
-    size       = local.minimal_node_pool_size
+    size       = local.small_node_pool_size
     auto_scale = true
     min_nodes  = 1
     max_nodes  = var.autoscaled_node_pool_max_nodes
