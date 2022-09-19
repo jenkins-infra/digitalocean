@@ -16,13 +16,13 @@ resource "digitalocean_kubernetes_cluster" "doks_public_cluster" {
     day        = var.maintenance_policy_day
   }
 
-  # Small node pool with autoscalling
+  # One node pool with autoscalling
   node_pool {
-    name       = "small-node-pool"
-    size       = local.minimal_node_pool_size
+    name       = "public-node-pool"
+    size       = local.public_node_pool_size
     auto_scale = true
     min_nodes  = 1
     max_nodes  = var.autoscaled_node_pool_max_nodes
-    tags       = ["node-pool-small", local.public_cluster_name]
+    tags       = ["node-pool-publi", local.public_cluster_name]
   }
 }
