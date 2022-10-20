@@ -1,7 +1,12 @@
+data "digitalocean_kubernetes_versions" "doks-public" {
+  version_prefix = "1.23."
+}
+
 resource "digitalocean_kubernetes_cluster" "doks_public_cluster" {
-  name          = local.public_cluster_name
-  region        = var.region
-  version       = local.doks_version
+  name   = local.public_cluster_name
+  region = var.region
+  # `doctl kubernetes options versions` doesn't return anything if the minor k8s version isn't supported anymore, note it can fail the build.
+  version       = data.digitalocean_kubernetes_versions.doks-public.latest_version
   auto_upgrade  = var.auto_upgrade
   surge_upgrade = true
   tags          = ["managed-by:terraform"]
@@ -23,6 +28,6 @@ resource "digitalocean_kubernetes_cluster" "doks_public_cluster" {
     auto_scale = true
     min_nodes  = 1
     max_nodes  = var.autoscaled_node_pool_max_nodes
-    tags       = ["node-pool-publi", local.public_cluster_name]
+    tags       = ["public-node-pool", local.public_cluster_name]
   }
 }
