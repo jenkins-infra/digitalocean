@@ -4,12 +4,6 @@ variable "region" {
   description = "DOKS region (availables regions: `doctl kubernetes options regions`)"
 }
 
-variable "kubernetes_version" {
-  type        = string
-  default     = "1.23."
-  description = "Kubernetes version in format '<MAJOR>.<MINOR>.'"
-}
-
 variable "autoscaled_node_pool_size" {
   type        = string
   default     = "c-16" # CPU optimized, 16vCPU/32GB (at 2022/02/17)

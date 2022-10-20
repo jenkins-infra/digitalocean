@@ -1,3 +1,7 @@
+data "digitalocean_kubernetes_versions" "doks" {
+  version_prefix = "1.22."
+}
+
 resource "digitalocean_kubernetes_cluster" "doks_cluster" {
   name          = local.cluster_name
   region        = var.region
@@ -25,6 +29,6 @@ resource "digitalocean_kubernetes_cluster" "doks_cluster" {
     size       = local.minimal_node_pool_size
     auto_scale = false
     node_count = 1
-    tags       = ["node-pool-minimal", local.cluster_name]
+    tags       = ["minimal-node-pool", local.cluster_name]
   }
 }
