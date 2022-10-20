@@ -5,7 +5,8 @@ data "digitalocean_kubernetes_versions" "doks" {
 resource "digitalocean_kubernetes_cluster" "doks_cluster" {
   name          = local.cluster_name
   region        = var.region
-  version       = local.doks_version
+  # `doctl kubernetes options versions` doesn't return anything if the minor k8s version isn't supported anymore, note it can fail the build.
+  version       = data.digitalocean_kubernetes_versions.doks.latest_version
   auto_upgrade  = var.auto_upgrade
   surge_upgrade = true
   tags          = ["managed-by:terraform"]
