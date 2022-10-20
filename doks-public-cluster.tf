@@ -3,8 +3,8 @@ data "digitalocean_kubernetes_versions" "doks-public" {
 }
 
 resource "digitalocean_kubernetes_cluster" "doks_public_cluster" {
-  name          = local.public_cluster_name
-  region        = var.region
+  name   = local.public_cluster_name
+  region = var.region
   # `doctl kubernetes options versions` doesn't return anything if the minor k8s version isn't supported anymore, note it can fail the build.
   version       = data.digitalocean_kubernetes_versions.doks-public.latest_version
   auto_upgrade  = var.auto_upgrade
