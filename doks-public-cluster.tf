@@ -17,7 +17,7 @@ resource "digitalocean_kubernetes_cluster" "doks_public_cluster" {
   }
 
   maintenance_policy {
-    start_time = "04:00"
+    start_time = "06:00"
     day        = "sunday"
   }
 
@@ -27,7 +27,7 @@ resource "digitalocean_kubernetes_cluster" "doks_public_cluster" {
     size       = "s-4vcpu-8gb" # Available sizes: `doctl compute size list`
     auto_scale = true
     min_nodes  = 1
-    max_nodes  = 10
+    max_nodes  = 4
     tags       = ["public-node-pool", local.public_cluster_name]
   }
 }
