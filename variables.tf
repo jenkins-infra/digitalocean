@@ -3,39 +3,3 @@ variable "region" {
   default     = "fra1"
   description = "DOKS region (availables regions: `doctl kubernetes options regions`)"
 }
-
-variable "autoscaled_node_pool_size" {
-  type        = string
-  default     = "c-16" # CPU optimized, 16vCPU/32GB (at 2022/02/17)
-  description = "Autoscaled node pool size (available sizes: `doctl compute size list`)"
-}
-
-variable "autoscaled_node_pool_max_nodes" {
-  type        = number
-  default     = 10
-  description = "Autoscaled node pool max nodes count"
-}
-
-variable "auto_upgrade" {
-  type        = bool
-  default     = true
-  description = "Activate Digital Ocean cluster auto-upgrade for path versions"
-}
-
-variable "autoscaled_node_pool_enabled" {
-  type        = bool
-  default     = true
-  description = "Activate autoscaled node pool (useful to disable it when credits are low)"
-}
-
-variable "maintenance_policy_start_time" {
-  type        = string
-  default     = "04:00"
-  description = "Auto-upgrade maintenance policy start time"
-}
-
-variable "maintenance_policy_day" {
-  type        = string
-  default     = "sunday"
-  description = "Auto-upgrade maintenance policy start time"
-}
