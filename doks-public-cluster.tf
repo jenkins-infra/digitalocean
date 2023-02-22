@@ -7,7 +7,7 @@ resource "digitalocean_kubernetes_cluster" "doks_public_cluster" {
   region = var.region
   # `doctl kubernetes options versions` doesn't return anything if the minor k8s version isn't supported anymore, note it can fail the build.
   version       = data.digitalocean_kubernetes_versions.doks-public.latest_version
-  auto_upgrade  = var.auto_upgrade
+  auto_upgrade  = true
   surge_upgrade = true
   tags          = ["managed-by:terraform"]
   lifecycle {
@@ -17,17 +17,17 @@ resource "digitalocean_kubernetes_cluster" "doks_public_cluster" {
   }
 
   maintenance_policy {
-    start_time = var.maintenance_policy_start_time
-    day        = var.maintenance_policy_day
+    start_time = "04:00"
+    day        = "sunday"
   }
 
   # One node pool with autoscalling
   node_pool {
     name       = "public-node-pool"
-    size       = local.public_node_pool_size
+    size       = "s-4vcpu-8gb" # Available sizes: `doctl compute size list`
     auto_scale = true
     min_nodes  = 1
-    max_nodes  = var.autoscaled_node_pool_max_nodes
+    max_nodes  = 10
     tags       = ["public-node-pool", local.public_cluster_name]
   }
 }
