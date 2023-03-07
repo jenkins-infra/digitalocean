@@ -41,7 +41,7 @@ resource "digitalocean_kubernetes_node_pool" "autoscaled-pool" {
   size       = "c-16" # available sizes: `doctl compute size list`
   auto_scale = true
   min_nodes  = 1
-  max_nodes  = 22
+  max_nodes  = 50
   tags       = ["node-pool-autoscaled", local.cluster_name]
   lifecycle {
     ignore_changes = [
