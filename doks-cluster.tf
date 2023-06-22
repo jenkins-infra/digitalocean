@@ -9,6 +9,7 @@ resource "digitalocean_kubernetes_cluster" "doks_cluster" {
   version       = data.digitalocean_kubernetes_versions.doks.latest_version
   auto_upgrade  = true
   surge_upgrade = true
+  ha            = true
   tags          = ["managed-by:terraform"]
   lifecycle {
     ignore_changes = [
