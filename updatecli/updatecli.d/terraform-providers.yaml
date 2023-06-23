@@ -27,12 +27,11 @@ targets:
       file: ".terraform.lock.hcl"
     scmID: default
 
-pullrequests:
+actions:
   default:
-    kind: github
-    scmID: default
-    targets:
-      - upgradeActualLockFile
+    kind: github/pullrequest
+    scmid: default
     spec:
       labels:
         - dependencies
+        - terraform-providers
