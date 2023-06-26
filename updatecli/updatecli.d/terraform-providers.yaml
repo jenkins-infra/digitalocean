@@ -1,4 +1,4 @@
-title: "Bump Terraform plugins - not modules"
+name: "Bump Terraform plugins - not modules"
 
 scms:
   default:
@@ -31,7 +31,6 @@ actions:
   default:
     kind: github/pullrequest
     scmid: default
-    title: "Bump Terraform plugins - not modules"
     spec:
       labels:
         - dependencies
