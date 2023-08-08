@@ -32,3 +32,82 @@ resource "digitalocean_kubernetes_cluster" "doks_public_cluster" {
     tags       = ["public-node-pool", local.public_cluster_name]
   }
 }
+
+# Data source required to configure the kubernetes provider as per https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/kubernetes_cluster#kubernetes-terraform-provider-example
+data "digitalocean_kubernetes_cluster" "doks_public" {
+  name       = local.public_cluster_name
+  depends_on = [digitalocean_kubernetes_cluster.doks_public_cluster]
+}
+provider "kubernetes" {
+  alias                  = "doks_public"
+  host                   = data.digitalocean_kubernetes_cluster.doks_public.kube_config.0.host
+  cluster_ca_certificate = base64decode(data.digitalocean_kubernetes_cluster.doks_public.kube_config.0.cluster_ca_certificate)
+  # Bootstrap requires to use the DigitalOcean API user as no service account or technical user are created in the cluster
+  exec {
+    api_version = "client.authentication.k8s.io/v1beta1"
+    command     = "doctl"
+    args = ["kubernetes", "cluster", "kubeconfig", "exec-credential",
+    "--version=v1beta1", data.digitalocean_kubernetes_cluster.doks_public.id]
+  }
+}
+
+# Configure the jenkins-infra/kubernetes-management admin service account
+resource "kubernetes_service_account_v1" "doks_public_infraciadmin" {
+  provider = kubernetes.doks_public
+  metadata {
+    name      = local.svcaccount_admin_name
+    namespace = local.svcaccount_admin_namespace
+  }
+  automount_service_account_token = "false"
+}
+resource "kubernetes_secret_v1" "doks_public_infraciadmin_token" {
+  provider = kubernetes.doks_public
+  metadata {
+    name      = "${local.svcaccount_admin_name}-token"
+    namespace = local.svcaccount_admin_namespace
+    annotations = {
+      "kubernetes.io/service-account.name" = "${local.svcaccount_admin_name}"
+    }
+  }
+  type = "kubernetes.io/service-account-token"
+}
+resource "kubernetes_cluster_role_binding" "doks_public_infraciadmin_clusteradmin" {
+  provider = kubernetes.doks_public
+  metadata {
+    name = "${local.svcaccount_admin_name}_clusteradmin"
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = "cluster-admin"
+  }
+  subject {
+    kind      = "ServiceAccount"
+    name      = local.svcaccount_admin_name
+    namespace = local.svcaccount_admin_namespace
+  }
+}
+
+output "kubeconfig_doks_public" {
+  sensitive = true
+  value     = <<-EOF
+  apiVersion: v1
+  kind: Config
+  clusters:
+    - name: ${local.public_cluster_name}
+      cluster:
+        certificate-authority-data: ${data.digitalocean_kubernetes_cluster.doks_public.kube_config.0.cluster_ca_certificate}
+        server: ${data.digitalocean_kubernetes_cluster.doks_public.kube_config.0.host}
+  contexts:
+    - name: ${local.svcaccount_admin_name}@${local.public_cluster_name}
+      context:
+        cluster: ${local.public_cluster_name}
+        namespace: ${local.svcaccount_admin_namespace}
+        user: ${local.svcaccount_admin_name}
+  users:
+    - name: ${local.svcaccount_admin_name}
+      user:
+        token: ${lookup(kubernetes_secret_v1.doks_public_infraciadmin_token.data, "token")}
+  current-context: ${local.svcaccount_admin_name}@${local.public_cluster_name}
+  EOF
+}

@@ -6,12 +6,12 @@ parallel(
     terraform(
       // "Read only" token
       stagingCredentials: [
-        string(variable: 'TF_VAR_do_token', credentialsId:'staging-terraform-digitalocean-pat'),
+        string(variable: 'DIGITALOCEAN_ACCESS_TOKEN', credentialsId:'staging-terraform-digitalocean-pat'),
         file(variable: 'BACKEND_CONFIG_FILE', credentialsId: 'staging-terraform-digitalocean-backend-config'),
       ],
       // "Read write" token
       productionCredentials: [
-        string(variable: 'TF_VAR_do_token', credentialsId:'production-terraform-digitalocean-pat'),
+        string(variable: 'DIGITALOCEAN_ACCESS_TOKEN', credentialsId:'production-terraform-digitalocean-pat'),
         file(variable: 'BACKEND_CONFIG_FILE', credentialsId: 'production-terraform-digitalocean-backend-config'),
       ],
     )

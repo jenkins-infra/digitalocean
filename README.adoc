@@ -9,7 +9,7 @@ This repository hosts the infrastructure-as-code definition for all the link:htt
 
 == Requirements
 
-* A Digital Ocean account with a personal access token defined as the value of the environment variable `TF_VAR_do_token`
+* A Digital Ocean account with a personal access token defined as the value of the environment variable `DIGITALOCEAN_ACCESS_TOKEN`
 * The requirements (of the shared tools) listed at link:{shared_tools_repo_url}/tree/main/terraform#requirements[{shared_tools_repo_name}/terraform#requirements]
 * The link:https://www.terraform.io/docs/language/settings/backends/s3.html[Terraform S3 Backend Configuration] on a local file named `backend-config`:
 ** The content can be retrieved from the outputs of the link:{private_repo_url}[(private) repository {private_repo_name}]
