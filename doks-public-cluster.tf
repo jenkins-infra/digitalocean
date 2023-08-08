@@ -33,8 +33,7 @@ resource "digitalocean_kubernetes_cluster" "doks_public_cluster" {
   }
 }
 
-# Data source required as per https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/kubernetes_cluster#kubernetes-terraform-provider-example
-# To configure the kuberenetes provider
+# Data source required to configure the kubernetes provider as per https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/kubernetes_cluster#kubernetes-terraform-provider-example
 data "digitalocean_kubernetes_cluster" "doks_public" {
   name       = local.public_cluster_name
   depends_on = [digitalocean_kubernetes_cluster.doks_public_cluster]
@@ -43,7 +42,7 @@ provider "kubernetes" {
   alias                  = "doks_public"
   host                   = data.digitalocean_kubernetes_cluster.doks_public.kube_config.0.host
   cluster_ca_certificate = base64decode(data.digitalocean_kubernetes_cluster.doks_public.kube_config.0.cluster_ca_certificate)
-  # Bootstrap requires to use the Digital Ocean API user as no service account or technical user are created in the cluster
+  # Bootstrap requires to use the DigitalOcean API user as no service account or technical user are created in the cluster
   exec {
     api_version = "client.authentication.k8s.io/v1beta1"
     command     = "doctl"
