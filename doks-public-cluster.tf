@@ -66,3 +66,7 @@ output "kubeconfig_doks_public" {
   sensitive = true
   value     = module.doks_public_admin_sa.kubeconfig
 }
+
+output "doks_public_public_ipv4_address" {
+  value = digitalocean_kubernetes_cluster.doks_public_cluster.ipv4_address
+}
