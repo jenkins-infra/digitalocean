@@ -14,6 +14,7 @@ resource "digitalocean_kubernetes_cluster" "doks_cluster" {
   lifecycle {
     ignore_changes = [
       updated_at,
+      version,
     ]
   }
 
