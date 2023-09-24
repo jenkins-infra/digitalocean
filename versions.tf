@@ -7,5 +7,11 @@ terraform {
     local = {
       source = "hashicorp/local"
     }
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+    }
+    random = {
+      source = "hashicorp/random"
+    }
   }
 }
