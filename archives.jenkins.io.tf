@@ -54,7 +54,6 @@ resource "digitalocean_firewall" "archives_jenkins_io" {
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 
-
   outbound_rule {
     protocol              = "tcp"
     port_range            = "53"
@@ -77,5 +76,11 @@ resource "digitalocean_firewall" "archives_jenkins_io" {
     protocol              = "tcp"
     port_range            = "443"
     destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  outbound_rule {
+    protocol              = "tcp"
+    port_range            = "8140"
+    destination_addresses = ["20.12.27.65/32"]
   }
 }
