@@ -25,7 +25,7 @@ resource "digitalocean_droplet" "archives_jenkins_io" {
   ipv6        = true
   resize_disk = true
   ssh_keys    = [digitalocean_ssh_key.archives_jenkins_io.fingerprint]
-  user_data   = base64encode(templatefile("${path.root}/.shared-tools/terraform/cloudinit.tftpl", { hostname = "do.archives.jenkins.io" }))
+  user_data   = templatefile("${path.root}/.shared-tools/terraform/cloudinit.tftpl", { hostname = "do.archives.jenkins.io" })
 
 }
 
