@@ -68,6 +68,10 @@ output "kubeconfig_doks_public" {
   value     = module.doks_public_admin_sa.kubeconfig
 }
 
+data "digitalocean_loadbalancer" "doks_public" {
+  name = "a04ff19a8410b4ac5a2b5c383b23a8b2"
+}
+
 output "doks_public_public_ipv4_address" {
-  value = digitalocean_kubernetes_cluster.doks_public_cluster.ipv4_address
+  value = data.digitalocean_loadbalancer.doks_public.ip
 }
