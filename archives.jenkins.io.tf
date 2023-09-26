@@ -6,7 +6,7 @@ resource "digitalocean_ssh_key" "archives_jenkins_io" {
 resource "digitalocean_volume" "archives_jenkins_io_data" {
   region                  = var.region
   name                    = "archivesjenkinsiodata" # Only lowercase alphanum
-  size                    = 700
+  size                    = 750
   initial_filesystem_type = "ext4"
   description             = "Data disk for archives.jenkins.io"
 }
@@ -26,7 +26,6 @@ resource "digitalocean_droplet" "archives_jenkins_io" {
   resize_disk = true
   ssh_keys    = [digitalocean_ssh_key.archives_jenkins_io.fingerprint]
   user_data   = templatefile("${path.root}/.shared-tools/terraform/cloudinit.tftpl", { hostname = "archives.do.jenkins.io" })
-
 }
 
 ## Allow accessing the internet in HTTP/HTTPS/DNS and allow incoming HTTP/HTTP from anywhere (public service)
@@ -37,9 +36,13 @@ resource "digitalocean_firewall" "archives_jenkins_io" {
   droplet_ids = [digitalocean_droplet.archives_jenkins_io.id]
 
   inbound_rule {
-    protocol         = "tcp"
-    port_range       = "22"
-    source_addresses = ["109.88.234.158/32"]
+    protocol   = "tcp"
+    port_range = "22"
+    # TODO: implement a common way to share admin IPs through terraform projects
+    source_addresses = [
+      "109.88.234.158/32", # dduportal
+      "129.146.98.132/32", # Oracle's VM archives.jenkins.io (for data migration)
+    ]
   }
 
   inbound_rule {
