@@ -38,10 +38,16 @@ resource "digitalocean_firewall" "archives_jenkins_io" {
   inbound_rule {
     protocol   = "tcp"
     port_range = "22"
+
     # TODO: implement a common way to share admin IPs through terraform projects
     source_addresses = [
-      "109.88.234.158/32", # dduportal
-      "129.146.98.132/32", # Oracle's VM archives.jenkins.io (for data migration)
+      "109.88.234.158/32",  # dduportal
+      "176.185.227.180/32", # hlemeur
+      "162.142.59.220/32",  # mwaite
+      "82.64.5.129/32",     # smerle33
+      "129.146.98.132/32",  # Oracle's VM archives.jenkins.io (for data migration)
+      "52.202.51.185/32",   # pkg.jenkins.io
+      "104.209.128.236/32", # trusted.ci.jenkins.io
     ]
   }
 
