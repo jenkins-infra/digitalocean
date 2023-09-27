@@ -99,8 +99,9 @@ resource "digitalocean_firewall" "archives_jenkins_io" {
     protocol              = "tcp"
     port_range            = "873"
     destination_addresses = [
-      "140.211.166.134/32", # ftp-osl.osuosl.org
-      "52.202.51.185/32",   # updates.jenkins.io
+      "140.211.166.134/32",     # ftp-osl.osuosl.org
+      "2605:bc80:3010::134/32", # ftp-osl.osuosl.org
+      "52.202.51.185/32",       # updates.jenkins.io
     ]
   }
 }
