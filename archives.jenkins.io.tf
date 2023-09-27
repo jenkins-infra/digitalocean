@@ -87,9 +87,20 @@ resource "digitalocean_firewall" "archives_jenkins_io" {
     destination_addresses = ["0.0.0.0/0", "::/0"]
   }
 
+  ## Allow puppet protocol to puppet.jenkins.io
   outbound_rule {
     protocol              = "tcp"
     port_range            = "8140"
     destination_addresses = ["20.12.27.65/32"]
+  }
+
+  ## Allow rsync protocol to OSUOSL and updates.jenkins.io
+  outbound_rule {
+    protocol              = "tcp"
+    port_range            = "873"
+    destination_addresses = [
+      "140.211.166.134/32", # ftp-osl.osuosl.org
+      "52.202.51.185/32",   # updates.jenkins.io
+    ]
   }
 }
