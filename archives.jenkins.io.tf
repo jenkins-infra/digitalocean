@@ -40,9 +40,9 @@ resource "digitalocean_firewall" "archives_jenkins_io" {
     port_range = "22"
 
     source_addresses = flatten(concat(
-      [for key, value in module.jenkins_infra.admin_public_ips : value],
-      module.jenkins_infra.outbound_ips["pkg.jenkins.io"],
-      module.jenkins_infra.outbound_ips["trusted.ci.jenkins.io"],
+      [for key, value in module.jenkins_infra_shared_data.admin_public_ips : value],
+      module.jenkins_infra_shared_data.outbound_ips["pkg.jenkins.io"],
+      module.jenkins_infra_shared_data.outbound_ips["trusted.ci.jenkins.io"],
     ))
   }
 
@@ -94,16 +94,16 @@ resource "digitalocean_firewall" "archives_jenkins_io" {
     protocol   = "tcp"
     port_range = "873"
     destination_addresses = flatten(concat(
-      module.jenkins_infra.external_service_ips["ftp-osl.osuosl.org"],
-      module.jenkins_infra.outbound_ips["pkg.jenkins.io"],
+      module.jenkins_infra_shared_data.external_service_ips["ftp-osl.osuosl.org"],
+      module.jenkins_infra_shared_data.outbound_ips["pkg.jenkins.io"],
     ))
   }
   outbound_rule {
     protocol   = "tcp"
     port_range = "22"
     destination_addresses = flatten(concat(
-      module.jenkins_infra.external_service_ips["ftp-osl.osuosl.org"],
-      module.jenkins_infra.outbound_ips["pkg.jenkins.io"],
+      module.jenkins_infra_shared_data.external_service_ips["ftp-osl.osuosl.org"],
+      module.jenkins_infra_shared_data.outbound_ips["pkg.jenkins.io"],
     ))
   }
 }
