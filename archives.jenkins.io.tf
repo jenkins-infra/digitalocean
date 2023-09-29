@@ -39,16 +39,11 @@ resource "digitalocean_firewall" "archives_jenkins_io" {
     protocol   = "tcp"
     port_range = "22"
 
-    # TODO: implement a common way to share admin IPs through terraform projects
-    source_addresses = [
-      "109.88.234.158/32",  # dduportal
-      "176.185.227.180/32", # hlemeur
-      "162.142.59.220/32",  # mwaite
-      "82.64.5.129/32",     # smerle33
-      "129.146.98.132/32",  # Oracle's VM archives.jenkins.io (for data migration)
-      "52.202.51.185/32",   # pkg.jenkins.io
-      "104.209.128.236/32", # trusted.ci.jenkins.io
-    ]
+    source_addresses = flatten(concat(
+      [for key, value in module.jenkins_infra_shared_data.admin_public_ips : value],
+      module.jenkins_infra_shared_data.outbound_ips["pkg.jenkins.io"],
+      module.jenkins_infra_shared_data.outbound_ips["trusted.ci.jenkins.io"],
+    ))
   }
 
   inbound_rule {
@@ -94,15 +89,21 @@ resource "digitalocean_firewall" "archives_jenkins_io" {
     destination_addresses = ["20.12.27.65/32"]
   }
 
-  ## Allow rsync protocol to OSUOSL and updates.jenkins.io
+  ## Allow rsyncing to OSUOSL and pkg.jenkins.io
   outbound_rule {
-    protocol              = "tcp"
-    port_range            = "873"
-    destination_addresses = ["0.0.0.0/0", "::/0"]
-    #destination_addresses = [
-    #  "140.211.166.134/32",     # ftp-osl.osuosl.org
-    #  "2605:bc80:3010::134/32", # ftp-osl.osuosl.org
-    #  "52.202.51.185/32",       # updates.jenkins.io
-    #]
+    protocol   = "tcp"
+    port_range = "873"
+    destination_addresses = flatten(concat(
+      module.jenkins_infra_shared_data.external_service_ips["ftp-osl.osuosl.org"],
+      module.jenkins_infra_shared_data.outbound_ips["pkg.jenkins.io"],
+    ))
+  }
+  outbound_rule {
+    protocol   = "tcp"
+    port_range = "22"
+    destination_addresses = flatten(concat(
+      module.jenkins_infra_shared_data.external_service_ips["ftp-osl.osuosl.org"],
+      module.jenkins_infra_shared_data.outbound_ips["pkg.jenkins.io"],
+    ))
   }
 }
