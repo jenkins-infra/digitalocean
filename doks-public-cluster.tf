@@ -33,11 +33,6 @@ resource "digitalocean_kubernetes_cluster" "doks_public_cluster" {
   }
 }
 
-# Data source required to configure the kubernetes provider as per https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/kubernetes_cluster#kubernetes-terraform-provider-example
-# data "digitalocean_kubernetes_cluster" "doks_public" {
-#   name       = local.public_cluster_name
-#   depends_on = [digitalocean_kubernetes_cluster.doks_public_cluster]
-# }
 provider "kubernetes" {
   alias                  = "doks_public"
   host                   = digitalocean_kubernetes_cluster.doks_public_cluster.kube_config.0.host
