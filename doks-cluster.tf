@@ -11,12 +11,6 @@ resource "digitalocean_kubernetes_cluster" "doks_cluster" {
   surge_upgrade = true
   ha            = true
   tags          = ["managed-by:terraform"]
-  lifecycle {
-    ignore_changes = [
-      updated_at,
-      version,
-    ]
-  }
 
   maintenance_policy {
     start_time = "04:00"
@@ -45,13 +39,6 @@ resource "digitalocean_kubernetes_node_pool" "autoscaled-pool" {
   min_nodes  = 1
   max_nodes  = 50
   tags       = ["node-pool-autoscaled", local.cluster_name]
-  lifecycle {
-    ignore_changes = [
-      node_count,
-      actual_node_count,
-      nodes,
-    ]
-  }
 }
 
 # Data source required to configure the kubernetes provider as per https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/kubernetes_cluster#kubernetes-terraform-provider-example

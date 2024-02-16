@@ -11,11 +11,6 @@ resource "digitalocean_kubernetes_cluster" "doks_public_cluster" {
   surge_upgrade = true
   ha            = true
   tags          = ["managed-by:terraform"]
-  lifecycle {
-    ignore_changes = [
-      updated_at,
-    ]
-  }
 
   maintenance_policy {
     start_time = "06:00"
