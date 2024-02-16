@@ -1,5 +1,5 @@
 data "digitalocean_kubernetes_versions" "doks-public" {
-  version_prefix = "1.27."
+  version_prefix = "1.26."
 }
 
 resource "digitalocean_kubernetes_cluster" "doks_public_cluster" {
@@ -14,6 +14,7 @@ resource "digitalocean_kubernetes_cluster" "doks_public_cluster" {
   lifecycle {
     ignore_changes = [
       updated_at,
+      version,
     ]
   }
 
@@ -33,16 +34,21 @@ resource "digitalocean_kubernetes_cluster" "doks_public_cluster" {
   }
 }
 
+# Data source required to configure the kubernetes provider as per https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/kubernetes_cluster#kubernetes-terraform-provider-example
+data "digitalocean_kubernetes_cluster" "doks_public" {
+  name       = local.public_cluster_name
+  depends_on = [digitalocean_kubernetes_cluster.doks_public_cluster]
+}
 provider "kubernetes" {
   alias                  = "doks_public"
-  host                   = digitalocean_kubernetes_cluster.doks_public_cluster.kube_config.0.host
-  cluster_ca_certificate = base64decode(digitalocean_kubernetes_cluster.doks_public_cluster.kube_config.0.cluster_ca_certificate)
+  host                   = data.digitalocean_kubernetes_cluster.doks_public.kube_config.0.host
+  cluster_ca_certificate = base64decode(data.digitalocean_kubernetes_cluster.doks_public.kube_config.0.cluster_ca_certificate)
   # Bootstrap requires to use the DigitalOcean API user as no service account or technical user are created in the cluster
   exec {
     api_version = "client.authentication.k8s.io/v1beta1"
     command     = "doctl"
     args = ["kubernetes", "cluster", "kubeconfig", "exec-credential",
-    "--version=v1beta1", digitalocean_kubernetes_cluster.doks_public_cluster.id]
+    "--version=v1beta1", data.digitalocean_kubernetes_cluster.doks_public.id]
   }
 }
 
@@ -53,8 +59,8 @@ module "doks_public_admin_sa" {
   }
   source                     = "./.shared-tools/terraform/modules/kubernetes-admin-sa"
   cluster_name               = local.public_cluster_name
-  cluster_hostname           = digitalocean_kubernetes_cluster.doks_public_cluster.kube_config.0.host
-  cluster_ca_certificate_b64 = digitalocean_kubernetes_cluster.doks_public_cluster.kube_config.0.cluster_ca_certificate
+  cluster_hostname           = data.digitalocean_kubernetes_cluster.doks_public.kube_config.0.host
+  cluster_ca_certificate_b64 = data.digitalocean_kubernetes_cluster.doks_public.kube_config.0.cluster_ca_certificate
 }
 
 output "kubeconfig_doks_public" {
