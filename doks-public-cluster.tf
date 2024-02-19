@@ -1,5 +1,5 @@
 data "digitalocean_kubernetes_versions" "doks-public" {
-  version_prefix = "1.26."
+  version_prefix = "1.27."
 }
 
 resource "digitalocean_kubernetes_cluster" "doks_public_cluster" {
