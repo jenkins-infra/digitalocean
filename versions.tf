@@ -4,14 +4,5 @@ terraform {
     digitalocean = {
       source = "digitalocean/digitalocean"
     }
-    local = {
-      source = "hashicorp/local"
-    }
-    kubernetes = {
-      source = "hashicorp/kubernetes"
-    }
-    random = {
-      source = "hashicorp/random"
-    }
   }
 }

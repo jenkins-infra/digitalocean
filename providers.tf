@@ -1,5 +1,2 @@
 provider "digitalocean" {
 }
-
-provider "local" {
-}
