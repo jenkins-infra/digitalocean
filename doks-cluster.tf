@@ -53,19 +53,3 @@ provider "kubernetes" {
     "--version=v1beta1", digitalocean_kubernetes_cluster.doks_cluster.id]
   }
 }
-
-# Configure the jenkins-infra/kubernetes-management admin service account
-module "doks_admin_sa" {
-  providers = {
-    kubernetes = kubernetes.doks
-  }
-  source                     = "./.shared-tools/terraform/modules/kubernetes-admin-sa"
-  cluster_name               = local.cluster_name
-  cluster_hostname           = digitalocean_kubernetes_cluster.doks_cluster.kube_config.0.host
-  cluster_ca_certificate_b64 = digitalocean_kubernetes_cluster.doks_cluster.kube_config.0.cluster_ca_certificate
-}
-
-output "kubeconfig_doks" {
-  sensitive = true
-  value     = module.doks_admin_sa.kubeconfig
-}

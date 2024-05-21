@@ -40,27 +40,3 @@ provider "kubernetes" {
     "--version=v1beta1", digitalocean_kubernetes_cluster.doks_public_cluster.id]
   }
 }
-
-# Configure the jenkins-infra/kubernetes-management admin service account
-module "doks_public_admin_sa" {
-  providers = {
-    kubernetes = kubernetes.doks_public
-  }
-  source                     = "./.shared-tools/terraform/modules/kubernetes-admin-sa"
-  cluster_name               = local.public_cluster_name
-  cluster_hostname           = digitalocean_kubernetes_cluster.doks_public_cluster.kube_config.0.host
-  cluster_ca_certificate_b64 = digitalocean_kubernetes_cluster.doks_public_cluster.kube_config.0.cluster_ca_certificate
-}
-
-output "kubeconfig_doks_public" {
-  sensitive = true
-  value     = module.doks_public_admin_sa.kubeconfig
-}
-
-data "digitalocean_loadbalancer" "doks_public" {
-  name = "a04ff19a8410b4ac5a2b5c383b23a8b2"
-}
-
-output "doks_public_public_ipv4_address" {
-  value = data.digitalocean_loadbalancer.doks_public.ip
-}
