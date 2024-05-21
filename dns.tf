@@ -4,13 +4,6 @@ resource "digitalocean_domain" "do_jenkins_io" {
   name = "do.jenkins.io"
 }
 
-resource "digitalocean_record" "repo_ipv4" {
-  domain = digitalocean_domain.do_jenkins_io.id
-  type   = "A"
-  name   = "repo"
-  value  = data.digitalocean_loadbalancer.doks_public.ip
-}
-
 resource "digitalocean_record" "archives_ipv4" {
   domain = digitalocean_domain.do_jenkins_io.id
   type   = "A"
