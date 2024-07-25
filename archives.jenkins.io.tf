@@ -40,9 +40,11 @@ resource "digitalocean_firewall" "archives_jenkins_io" {
     port_range = "22"
 
     source_addresses = flatten(concat(
-      [for key, value in module.jenkins_infra_shared_data.admin_public_ips : value],
-      module.jenkins_infra_shared_data.outbound_ips["pkg.jenkins.io"],
-      module.jenkins_infra_shared_data.outbound_ips["trusted.ci.jenkins.io"],
+      module.jenkins_infra_shared_data.outbound_ips["pkg.jenkins.io"],                    # Data sync script from the `pkg` VM
+      module.jenkins_infra_shared_data.outbound_ips["trusted.ci.jenkins.io"],             # permanent agent of update_center2
+      module.jenkins_infra_shared_data.outbound_ips["trusted.sponsorship.ci.jenkins.io"], # ephemeral agents for crawler
+      module.jenkins_infra_shared_data.outbound_ips["privatek8s.jenkins.io"],             # Terraform management + VPN VM
+      module.jenkins_infra_shared_data.outbound_ips["private.vpn.jenkins.io"],            # connections routed through the VPN
     ))
   }
 
