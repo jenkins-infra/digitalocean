@@ -1,3 +1,8 @@
+if (env.BRANCH_IS_PRIMARY) {
+  // Only trigger a daily check on the principal branch
+  properties([pipelineTriggers([cron('@daily')])])
+}
+
 terraform(
   // "Read only" token
   stagingCredentials: [
