@@ -1,23 +1,17 @@
-parallel(
-  failFast: false,
-  'terraform': {
-    terraform(
-      // "Read only" token
-      stagingCredentials: [
-        string(variable: 'DIGITALOCEAN_ACCESS_TOKEN', credentialsId:'staging-terraform-digitalocean-pat'),
-        file(variable: 'BACKEND_CONFIG_FILE', credentialsId: 'staging-terraform-digitalocean-backend-config'),
-      ],
-      // "Read write" token
-      productionCredentials: [
-        string(variable: 'DIGITALOCEAN_ACCESS_TOKEN', credentialsId:'production-terraform-digitalocean-pat'),
-        file(variable: 'BACKEND_CONFIG_FILE', credentialsId: 'production-terraform-digitalocean-backend-config'),
-      ],
-    )
-  },
-  'updatecli': {
-    updatecli(action: 'diff')
-    if (env.BRANCH_IS_PRIMARY) {
-      updatecli(action: 'apply', cronTriggerExpression: '@daily')
-    }
-  },
+if (env.BRANCH_IS_PRIMARY) {
+  // Only trigger a daily check on the principal branch
+  properties([pipelineTriggers([cron('@daily')])])
+}
+
+terraform(
+  // "Read only" token
+  stagingCredentials: [
+    string(variable: 'DIGITALOCEAN_ACCESS_TOKEN', credentialsId:'staging-terraform-digitalocean-pat'),
+    file(variable: 'BACKEND_CONFIG_FILE', credentialsId: 'staging-terraform-digitalocean-backend-config'),
+  ],
+  // "Read write" token
+  productionCredentials: [
+    string(variable: 'DIGITALOCEAN_ACCESS_TOKEN', credentialsId:'production-terraform-digitalocean-pat'),
+    file(variable: 'BACKEND_CONFIG_FILE', credentialsId: 'production-terraform-digitalocean-backend-config'),
+  ],
 )
