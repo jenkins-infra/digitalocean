@@ -20,7 +20,7 @@ resource "digitalocean_droplet" "archives_jenkins_io" {
   image       = "ubuntu-22-04-x64"
   name        = "archives.jenkins.io"
   region      = var.region
-  size        = "s-2vcpu-2gb"
+  size        = "s-4vcpu-8gb"
   monitoring  = true
   ipv6        = true
   resize_disk = true
