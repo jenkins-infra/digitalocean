@@ -1,0 +1,26 @@
+#cloud-config
+write_files:
+  # Configuration file for puppet agent on this VM (${hostname})
+  # Not directly at the destination path as it would get the the puppet package installation stuck (asking to override)
+  # Also, when writing files, do not use /tmp dir as it races with systemd-tmp. Use /run/<somedir> instead (as per. : https://cloudinit.readthedocs.io/en/latest/topics/modules.html#runcmd)
+  - path: /run/puppetinstall/puppet.conf
+    owner: root:root
+    permissions: '0640'
+    content: |
+      [main]
+      server = puppet.jenkins.io
+      [agent]
+      certname = ${hostname}
+runcmd:
+  - [ mkdir, -p, /run/puppetinstall ]
+  - [ apt-get, update, --yes, --quiet ]
+  - [ apt-get, install, --yes, --quiet, --no-install-recommends, bash-completion, cron, htop, iotop, locales, vim, wget ]
+  - [ wget, "https://apt.puppetlabs.com/puppet6-release-focal.deb", -O, /run/puppetinstall/puppet6-release-focal.deb ]
+  - [ locale-gen, en_US.UTF-8 ]
+  - [ dpkg, -i, /run/puppetinstall/puppet6-release-focal.deb ]
+  - [ apt-get, update, --yes, --quiet ]
+  - [ apt-get, install, "puppet-agent=6.*", --yes, --quiet, --no-install-recommends ]
+  # see above comment in the "write_files" section
+  - [ mv, /run/puppetinstall/puppet.conf, /etc/puppetlabs/puppet/puppet.conf]
+  - [ systemctl, enable, puppet ]
+  - [ systemctl, start, puppet ]
