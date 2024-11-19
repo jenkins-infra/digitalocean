@@ -25,10 +25,7 @@ resource "digitalocean_droplet" "archives_jenkins_io" {
   ipv6        = true
   resize_disk = true
   ssh_keys    = [digitalocean_ssh_key.archives_jenkins_io.fingerprint]
-  user_data = templatefile("${path.root}/.shared-tools/terraform/cloudinit.tftpl", {
-    hostname       = "archives.do.jenkins.io",
-    admin_username = "",
-  })
+  user_data   = templatefile("${path.root}/archives.jenkins.io-cloudinit.tftpl", { hostname = "archives.do.jenkins.io" })
 }
 
 ## Allow accessing the internet in HTTP/HTTPS/DNS and allow incoming HTTP/HTTP from anywhere (public service)
