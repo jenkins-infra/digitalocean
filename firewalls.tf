@@ -7,11 +7,7 @@ resource "digitalocean_firewall" "default" {
     port_range = "22"
 
     source_addresses = flatten(concat(
-      module.jenkins_infra_shared_data.outbound_ips["pkg.jenkins.io"],                    # Data sync script from the `pkg` VM
-      module.jenkins_infra_shared_data.outbound_ips["trusted.ci.jenkins.io"],             # permanent agent of update_center2
-      module.jenkins_infra_shared_data.outbound_ips["trusted.sponsorship.ci.jenkins.io"], # ephemeral agents for crawler
-      module.jenkins_infra_shared_data.outbound_ips["privatek8s.jenkins.io"],             # Terraform management + VPN VM
-      module.jenkins_infra_shared_data.outbound_ips["private.vpn.jenkins.io"],            # connections routed through the VPN
+      module.jenkins_infra_shared_data.outbound_ips["private.vpn.jenkins.io"], # connections routed through the VPN
     ))
   }
 
@@ -51,18 +47,16 @@ resource "digitalocean_firewall" "archives" {
   name        = "archives"
   droplet_ids = [digitalocean_droplet.archives_jenkins_io.id]
 
-  # open http to serve pages
   inbound_rule {
-    protocol         = "tcp"
-    port_range       = "80"
-    source_addresses = ["0.0.0.0/0", "::/0"]
-  }
+    protocol   = "tcp"
+    port_range = "22"
 
-  # open https to serve pages
-  inbound_rule {
-    protocol         = "tcp"
-    port_range       = "443"
-    source_addresses = ["0.0.0.0/0", "::/0"]
+    source_addresses = flatten(concat(
+      module.jenkins_infra_shared_data.outbound_ips["pkg.jenkins.io"],                    # Data sync script from the `pkg` VM
+      module.jenkins_infra_shared_data.outbound_ips["trusted.ci.jenkins.io"],             # permanent agent of update_center2
+      module.jenkins_infra_shared_data.outbound_ips["trusted.sponsorship.ci.jenkins.io"], # ephemeral agents for crawler
+      module.jenkins_infra_shared_data.outbound_ips["privatek8s.jenkins.io"],             # Terraform management + VPN VM
+    ))
   }
 
   ## Allow rsyncing to OSUOSL and pkg.jenkins.io
@@ -82,4 +76,24 @@ resource "digitalocean_firewall" "archives" {
       module.jenkins_infra_shared_data.outbound_ips["pkg.jenkins.io"],
     ))
   }
+}
+
+resource "digitalocean_firewall" "web" {
+  name        = "web"
+  droplet_ids = [digitalocean_droplet.archives_jenkins_io.id]
+
+  # open http to serve pages
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "80"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  # open https to serve pages
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "443"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
 }
