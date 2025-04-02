@@ -95,5 +95,4 @@ resource "digitalocean_firewall" "web" {
     port_range       = "443"
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
-
 }
