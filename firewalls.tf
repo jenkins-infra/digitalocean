@@ -1,5 +1,5 @@
 resource "digitalocean_firewall" "default" {
-  name = "default"
+  name        = "default"
   droplet_ids = [digitalocean_droplet.archives_jenkins_io.id, digitalocean_droplet.puppet_do_jenkins_io.id]
 
   inbound_rule {
@@ -44,7 +44,7 @@ resource "digitalocean_firewall" "default" {
 }
 
 resource "digitalocean_firewall" "archives" {
-  name = "archives"
+  name        = "archives"
   droplet_ids = [digitalocean_droplet.archives_jenkins_io.id]
 
   inbound_rule {
@@ -98,7 +98,7 @@ resource "digitalocean_firewall" "web" {
 }
 
 resource "digitalocean_firewall" "puppet" {
-  name = "puppet"
+  name        = "puppet"
   droplet_ids = [digitalocean_droplet.puppet_do_jenkins_io.id]
 
   # allow-inbound-webhooks-from-github-to-puppet
