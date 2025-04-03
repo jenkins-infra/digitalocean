@@ -13,4 +13,5 @@ resource "digitalocean_droplet" "puppet_do_jenkins_io" {
   resize_disk = true
   ssh_keys    = [digitalocean_ssh_key.puppet_do_jenkins_io.fingerprint]
   user_data   = templatefile("${path.root}/cloudinit.tftpl", { hostname = "puppet.do.jenkins.io" })
+  tags        = concat([for key, value in local.default_tags : "${key}:${value}"])
 }
