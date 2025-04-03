@@ -28,4 +28,5 @@ resource "digitalocean_droplet" "archives_jenkins_io" {
   resize_disk = true
   ssh_keys    = [digitalocean_ssh_key.archives_jenkins_io.fingerprint]
   user_data   = templatefile("${path.root}/archives.jenkins.io-cloudinit.tftpl", { hostname = "archives.do.jenkins.io" })
+  tags        = concat([for key, value in local.default_tags : "${key}:${value}"])
 }
