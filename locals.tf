@@ -1,6 +1,6 @@
 locals {
   default_tags = {
     scope      = "terraform-managed"
-    repository = "jenkins-infra_digitalocean"
+    jenkins_infra_repository = "digitalocean"
   }
 }
