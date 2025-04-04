@@ -5,7 +5,7 @@ resource "digitalocean_ssh_key" "weekly_ci_jenkins_io" {
 
 resource "digitalocean_droplet" "weekly_ci_jenkins_io" {
   image       = "ubuntu-24-04-x64"
-  name        = "weekly_ci.jenkins.io"
+  name        = "weekly.ci.jenkins.io"
   region      = var.region
   size        = "s-2vcpu-8gb-amd" # Basic AMD 	s-2vcpu-8gb-amd	8 GB 	2 	100 GB 	5 TB 	$42 	$0.0625 https://slugs.do-api.dev/
   monitoring  = true
