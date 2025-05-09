@@ -1,6 +1,6 @@
 resource "digitalocean_firewall" "default" {
   name        = "default"
-  droplet_ids = [digitalocean_droplet.archives_jenkins_io.id, digitalocean_droplet.puppet_do_jenkins_io.id]
+  droplet_ids = [digitalocean_droplet.archives_jenkins_io.id, digitalocean_droplet.puppet_do_jenkins_io.id, digitalocean_droplet.weekly_ci_jenkins_io.id]
 
   inbound_rule {
     protocol   = "tcp"
@@ -85,7 +85,7 @@ resource "digitalocean_firewall" "archives" {
 
 resource "digitalocean_firewall" "web" {
   name        = "web"
-  droplet_ids = [digitalocean_droplet.archives_jenkins_io.id]
+  droplet_ids = [digitalocean_droplet.archives_jenkins_io.id, digitalocean_droplet.weekly_ci_jenkins_io.id]
 
   # open http to serve pages
   inbound_rule {
