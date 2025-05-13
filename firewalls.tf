@@ -1,6 +1,6 @@
 resource "digitalocean_firewall" "default" {
   name        = "default"
-  droplet_ids = [digitalocean_droplet.archives_jenkins_io.id, digitalocean_droplet.puppet_do_jenkins_io.id]
+  droplet_ids = [digitalocean_droplet.archives_jenkins_io.id]
 
   inbound_rule {
     protocol   = "tcp"
@@ -99,34 +99,5 @@ resource "digitalocean_firewall" "web" {
     protocol         = "tcp"
     port_range       = "443"
     source_addresses = ["0.0.0.0/0", "::/0"]
-  }
-}
-
-resource "digitalocean_firewall" "puppet" {
-  name        = "puppet"
-  droplet_ids = [digitalocean_droplet.puppet_do_jenkins_io.id]
-
-  # allow-inbound-webhooks-from-github-to-puppet
-  inbound_rule {
-    protocol         = "tcp"
-    port_range       = "8080"
-    source_addresses = local.github_ips.webhooks
-  }
-
-  # allow-inbound-ssh-to-puppet from admin
-  inbound_rule {
-    protocol   = "tcp"
-    port_range = "22"
-
-    source_addresses = flatten(concat(
-      [for key, value in module.jenkins_infra_shared_data.admin_public_ips : value], # Temporarily setting admins access until the VPN knows the ip of the droplet
-    ))
-  }
-
-  # allow_inbound_puppet_from_vms
-  inbound_rule {
-    protocol         = "tcp"
-    port_range       = "8140"
-    source_addresses = ["0.0.0.0/0", "::/0"] # TODO: restrict to only our VM outbound IPs
   }
 }

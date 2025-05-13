@@ -6,7 +6,7 @@ locals {
     webhooks = ["140.82.112.0/20", "143.55.64.0/20", "185.199.108.0/22", "192.30.252.0/22"]
   }
   default_tags = {
-    scope      = "terraform-managed"
+    scope                    = "terraform-managed"
     jenkins_infra_repository = "digitalocean"
   }
 }
