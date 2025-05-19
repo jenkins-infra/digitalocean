@@ -64,6 +64,14 @@ resource "digitalocean_firewall" "archives" {
     ))
   }
 
+  # Allow rsync. IP restriction is set at rsync service level, not at firewall level
+  inbound_rule {
+    protocol   = "tcp"
+    port_range = "873"
+
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
   ## Allow rsyncing to OSUOSL and pkg.jenkins.io
   outbound_rule {
     protocol   = "tcp"
