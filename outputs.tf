@@ -7,6 +7,10 @@ resource "local_file" "jenkins_infra_data_report" {
         "ns2.digitalocean.com",
         "ns3.digitalocean.com",
       ],
+      "service_ips" = {
+        "ipv4" = digitalocean_droplet.archives_jenkins_io.ipv4_address,
+        "ipv6" = digitalocean_droplet.archives_jenkins_io.ipv6_address,
+      },
       "outbound_ips" = {
         "ipv4" = digitalocean_droplet.archives_jenkins_io.ipv4_address,
         "ipv6" = digitalocean_droplet.archives_jenkins_io.ipv6_address,
