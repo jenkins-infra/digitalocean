@@ -4,5 +4,8 @@ terraform {
     digitalocean = {
       source = "digitalocean/digitalocean"
     }
+    local = {
+      source = "hashicorp/local"
+    }
   }
 }
