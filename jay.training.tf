@@ -3,7 +3,6 @@ resource "digitalocean_ssh_key" "jay_training" {
   public_key = file("ssh/id_jay_training.pub")
 }
 
-
 resource "digitalocean_droplet" "jay_training" {
   image       = "ubuntu-22-04-x64"
   name        = "jay.training"
