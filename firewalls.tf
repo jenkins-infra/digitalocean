@@ -7,7 +7,7 @@ resource "digitalocean_firewall" "default" {
     port_range = "22"
 
     source_addresses = flatten(concat(
-      module.jenkins_infra_shared_data.outbound_ips["private.vpn.jenkins.io"], # connections routed through the VPN
+      split(" ", local.outbound_ips_private_vpn_jenkins_io), # connections routed through the VPN
     ))
   }
 
@@ -52,15 +52,10 @@ resource "digitalocean_firewall" "archives" {
     port_range = "22"
 
     source_addresses = flatten(concat(
-      module.jenkins_infra_shared_data.outbound_ips["pkg.jenkins.io"],                    # Data sync script from the `pkg` VM
-      module.jenkins_infra_shared_data.outbound_ips["trusted.ci.jenkins.io"],             # permanent agent of update_center2
-      module.jenkins_infra_shared_data.outbound_ips["trusted.sponsorship.ci.jenkins.io"], # ephemeral agents for crawler
-      # TODO: track with updatecli - https://reports.jenkins.io/jenkins-infra-data-reports/azure-net.json
-      ["172.176.126.194"], # VPN outbound IP
-      # TODO: track with updatecli - https://reports.jenkins.io/jenkins-infra-data-reports/azure-net.json
-      ["20.57.120.46", "52.179.141.53"], # Outbound IPv4 of the privatek8s cluster NAT gateway (release.ci agents, controller and infra.ci controller)
-      # TODO: track with updatecli - https://reports.jenkins.io/jenkins-infra-data-reports/azure-net.json
-      ["172.210.200.59", "20.10.193.4"], # Outbound IPv4 of the infracijio agents NAT gateway
+      split(" ", local.outbound_ips_pkg_origin_jenkins_io),  # Data sync script from the `pkg` VM
+      split(" ", local.outbound_ips_trusted_ci_jenkins_io),  # trusted.ci.jenkins.io (controller and all agents) for rsync data transfer
+      split(" ", local.outbound_ips_private_vpn_jenkins_io), # connections routed through the VPN
+      split(" ", local.outbound_ips_infra_ci_jenkins_io),    # infra.ci.jenkins.io (controller and all agents) for SSH management
     ))
   }
 
@@ -77,16 +72,16 @@ resource "digitalocean_firewall" "archives" {
     protocol   = "tcp"
     port_range = "873"
     destination_addresses = flatten(concat(
-      module.jenkins_infra_shared_data.external_service_ips["ftp-osl.osuosl.org"],
-      module.jenkins_infra_shared_data.outbound_ips["pkg.jenkins.io"],
+      split(" ", local.inbound_ips_ftp_osl_osuosl_org),
+      split(" ", local.inbound_ips_pkg_origin_jenkins_io),
     ))
   }
   outbound_rule {
     protocol   = "tcp"
     port_range = "22"
     destination_addresses = flatten(concat(
-      module.jenkins_infra_shared_data.external_service_ips["ftp-osl.osuosl.org"],
-      module.jenkins_infra_shared_data.outbound_ips["pkg.jenkins.io"],
+      split(" ", local.inbound_ips_ftp_osl_osuosl_org),
+      split(" ", local.inbound_ips_pkg_origin_jenkins_io),
     ))
   }
 }
