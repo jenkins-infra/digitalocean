@@ -1,3 +1,5 @@
+@Library('pipeline-library@pull/957/head') _
+
 if (env.BRANCH_IS_PRIMARY) {
   // Only trigger a daily check on the principal branch
   properties([pipelineTriggers([cron('@daily')])])
