@@ -27,6 +27,6 @@ resource "digitalocean_droplet" "usage_jenkins_io" {
   ipv6        = true
   resize_disk = true
   ssh_keys    = [digitalocean_ssh_key.usage_jenkins_io.fingerprint]
-  user_data   = templatefile("${path.root}/cloudinit.tftpl", { hostname = "do.usage.jenkins.io" })
+  user_data   = templatefile("${path.root}/cloudinit/usage-cloudinit.tftpl", { hostname = "do.usage.jenkins.io" })
   tags        = concat([for key, value in local.default_tags : "${key}:${value}"])
 }
