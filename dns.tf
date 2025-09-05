@@ -1,5 +1,6 @@
 # Child DNS Zone delegated from Azure
 # https://docs.digitalocean.com/products/networking/dns/getting-started/dns-registrars/
+# defined as code here https://github.com/jenkins-infra/azure-net/blob/da51f9ddc012e4cb0eed6299917b7be22db249c2/dns-records.tf#L487-L497
 resource "digitalocean_domain" "do_jenkins_io" {
   name = "do.jenkins.io"
 }
