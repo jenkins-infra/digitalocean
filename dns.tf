@@ -17,3 +17,17 @@ resource "digitalocean_record" "archives_ipv6" {
   name   = "archives"
   value  = digitalocean_droplet.archives_jenkins_io.ipv6_address
 }
+
+resource "digitalocean_record" "usage_ipv4" {
+  domain = digitalocean_domain.do_jenkins_io.id
+  type   = "A"
+  name   = "usage"
+  value  = digitalocean_droplet.usage_jenkins_io.ipv4_address
+}
+
+resource "digitalocean_record" "usage_ipv6" {
+  domain = digitalocean_domain.do_jenkins_io.id
+  type   = "AAAA"
+  name   = "usage"
+  value  = digitalocean_droplet.usage_jenkins_io.ipv6_address
+}
