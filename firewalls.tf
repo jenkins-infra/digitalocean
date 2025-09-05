@@ -1,6 +1,6 @@
 resource "digitalocean_firewall" "default" {
   name        = "default"
-  droplet_ids = [digitalocean_droplet.archives_jenkins_io.id]
+  droplet_ids = [digitalocean_droplet.archives_jenkins_io.id, digitalocean_droplet.usage_jenkins_io.id]
 
   inbound_rule {
     protocol   = "tcp"
@@ -88,7 +88,7 @@ resource "digitalocean_firewall" "archives" {
 
 resource "digitalocean_firewall" "web" {
   name        = "web"
-  droplet_ids = [digitalocean_droplet.archives_jenkins_io.id]
+  droplet_ids = [digitalocean_droplet.archives_jenkins_io.id, digitalocean_droplet.usage_jenkins_io.id]
 
   # open http to serve pages
   inbound_rule {
@@ -101,6 +101,30 @@ resource "digitalocean_firewall" "web" {
   inbound_rule {
     protocol         = "tcp"
     port_range       = "443"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+}
+
+resource "digitalocean_firewall" "usage" {
+  name        = "usage_jenkins_io"
+  droplet_ids = [digitalocean_droplet.usage_jenkins_io.id]
+
+  inbound_rule {
+    protocol   = "tcp"
+    port_range = "22"
+
+    source_addresses = flatten(concat(
+      split(" ", local.outbound_ips_trusted_ci_jenkins_io),  # trusted.ci.jenkins.io (controller and all agents) for futur job
+      split(" ", local.outbound_ips_private_vpn_jenkins_io), # connections routed through the VPN
+      split(" ", local.outbound_ips_infra_ci_jenkins_io),    # infra.ci.jenkins.io (controller and all agents) for SSH management
+    ))
+  }
+
+  # Allow rsync. IP restriction is set at rsync service level, not at firewall level (used for 1st copy)
+  inbound_rule {
+    protocol   = "tcp"
+    port_range = "873"
+
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 }
