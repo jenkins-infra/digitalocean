@@ -109,22 +109,13 @@ resource "digitalocean_firewall" "usage" {
   name        = "usage_jenkins_io"
   droplet_ids = [digitalocean_droplet.usage_jenkins_io.id]
 
+  # Allow ssh connexion from old usage VM (in CloudBees AWS) for migration
   inbound_rule {
     protocol   = "tcp"
     port_range = "22"
 
     source_addresses = flatten(concat(
-      split(" ", local.outbound_ips_trusted_ci_jenkins_io),  # trusted.ci.jenkins.io (controller and all agents) for futur job
-      split(" ", local.outbound_ips_private_vpn_jenkins_io), # connections routed through the VPN
-      split(" ", local.outbound_ips_infra_ci_jenkins_io),    # infra.ci.jenkins.io (controller and all agents) for SSH management
+      split(" ", local.inbound_ips_usage_legacy),
     ))
-  }
-
-  # Allow rsync. IP restriction is set at rsync service level, not at firewall level (used for 1st copy)
-  inbound_rule {
-    protocol   = "tcp"
-    port_range = "873"
-
-    source_addresses = ["0.0.0.0/0", "::/0"]
   }
 }
