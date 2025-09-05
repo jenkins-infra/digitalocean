@@ -1,6 +1,6 @@
 resource "digitalocean_firewall" "default" {
   name        = "default"
-  droplet_ids = [digitalocean_droplet.archives_jenkins_io.id]
+  droplet_ids = [digitalocean_droplet.archives_jenkins_io.id, digitalocean_droplet.usage_jenkins_io.id]
 
   inbound_rule {
     protocol   = "tcp"
@@ -88,7 +88,7 @@ resource "digitalocean_firewall" "archives" {
 
 resource "digitalocean_firewall" "web" {
   name        = "web"
-  droplet_ids = [digitalocean_droplet.archives_jenkins_io.id]
+  droplet_ids = [digitalocean_droplet.archives_jenkins_io.id, digitalocean_droplet.usage_jenkins_io.id]
 
   # open http to serve pages
   inbound_rule {
@@ -102,5 +102,20 @@ resource "digitalocean_firewall" "web" {
     protocol         = "tcp"
     port_range       = "443"
     source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+}
+
+resource "digitalocean_firewall" "usage" {
+  name        = "usage_jenkins_io"
+  droplet_ids = [digitalocean_droplet.usage_jenkins_io.id]
+
+  # Allow ssh connexion from old usage VM (in CloudBees AWS) for migration
+  inbound_rule {
+    protocol   = "tcp"
+    port_range = "22"
+
+    source_addresses = flatten(concat(
+      split(" ", local.inbound_ips_usage_legacy),
+    ))
   }
 }
