@@ -106,7 +106,7 @@ resource "digitalocean_firewall" "web" {
 }
 
 resource "digitalocean_firewall" "usage" {
-  name        = "usage_jenkins_io"
+  name        = "usage"
   droplet_ids = [digitalocean_droplet.usage_jenkins_io.id]
 
   # Allow ssh connexion from old usage VM (in CloudBees AWS) for migration
