@@ -11,7 +11,7 @@ locals {
   }
 
   # Tracked by 'updatecli' from the following source: https://reports.jenkins.io/jenkins-infra-data-reports/azure-net.json
-  outbound_ips_private_vpn_jenkins_io = "172.176.126.194"
+  outbound_ips_private_vpn_jenkins_io = "52.232.183.117"
   # Tracked by 'updatecli' from the following source: https://reports.jenkins.io/jenkins-infra-data-reports/azure-net.json
   outbound_ips_trusted_ci_jenkins_io = "104.209.128.236"
   # Tracked by 'updatecli' from the following source: https://reports.jenkins.io/jenkins-infra-data-reports/azure-net.json
