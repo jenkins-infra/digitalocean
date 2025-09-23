@@ -17,16 +17,19 @@ resource "digitalocean_volume_attachment" "usage_jenkins_io_data" {
   volume_id  = digitalocean_volume.usage_jenkins_io_data.id
 }
 
+locals {
+  usage_jenkins_io_vmname = "usage"
+}
 resource "digitalocean_droplet" "usage_jenkins_io" {
   # default username is root. TODO change it with cloudinit
   image       = "ubuntu-22-04-x64"
-  name        = "usage.jenkins.io"
+  name        = local.usage_jenkins_io_vmname
   region      = var.region
   size        = "s-2vcpu-4gb"
   monitoring  = true
   ipv6        = true
   resize_disk = true
   ssh_keys    = [digitalocean_ssh_key.usage_jenkins_io.fingerprint]
-  user_data   = templatefile("${path.root}/cloudinit/usage-cloudinit.tftpl", { hostname = "do.usage.jenkins.io" })
-  tags        = concat([for key, value in local.default_tags : "${key}:${value}"])
+  user_data   = templatefile("${path.root}/cloudinit/usage-cloudinit.tftpl", { hostname = "${local.usage_jenkins_io_vmname}.${digitalocean_domain.do_jenkins_io.name}" })
+  tags        = concat([for key, value in local.default_tags : "${key}:${value}"], ["usage_jenkins_io"])
 }
