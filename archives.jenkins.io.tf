@@ -20,13 +20,13 @@ resource "digitalocean_volume_attachment" "archives_jenkins_io_data" {
 resource "digitalocean_droplet" "archives_jenkins_io" {
   # default username is root. TODO change it with cloudinit
   image       = "ubuntu-22-04-x64"
-  name        = "archives.jenkins.io"
+  name        = local.archives_jenkins_io_vmname
   region      = var.region
   size        = "s-4vcpu-8gb"
   monitoring  = true
   ipv6        = true
   resize_disk = true
   ssh_keys    = [digitalocean_ssh_key.archives_jenkins_io.fingerprint]
-  user_data   = templatefile("${path.root}/cloudinit.tftpl", { hostname = "archives.do.jenkins.io" })
+  user_data   = templatefile("${path.root}/cloudinit.tftpl", { hostname = local.archives_jenkins_io_fqdn })
   tags        = concat([for key, value in local.default_tags : "${key}:${value}"])
 }
