@@ -10,6 +10,12 @@ locals {
     jenkins_infra_repository = "digitalocean"
   }
 
+  usage_jenkins_io_vmname = "usage"
+  usage_jenkins_io_fqdn   = "${local.usage_jenkins_io_vmname}.${digitalocean_domain.do_jenkins_io.name}"
+
+  archives_jenkins_io_vmname = "archives"
+  archives_jenkins_io_fqdn   = "${local.archives_jenkins_io_vmname}.${digitalocean_domain.do_jenkins_io.name}"
+
   # Tracked by 'updatecli' from the following source: https://reports.jenkins.io/jenkins-infra-data-reports/azure-net.json
   outbound_ips_private_vpn_jenkins_io = "52.232.183.117"
   # Tracked by 'updatecli' from the following source: https://reports.jenkins.io/jenkins-infra-data-reports/azure-net.json
