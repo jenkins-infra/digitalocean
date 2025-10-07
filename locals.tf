@@ -28,6 +28,4 @@ locals {
   outbound_ips_pkg_origin_jenkins_io = "52.202.51.185"
   # TODO: track with updatecli
   inbound_ips_ftp_osl_osuosl_org = "140.211.166.134 2605:bc80:3010::134"
-  # TODO: track with updatecli from https://reports.jenkins.io/jenkins-infra-data-reports/aws.json
-  inbound_ips_usage_legacy = "52.204.62.78"
 }
