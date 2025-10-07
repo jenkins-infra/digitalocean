@@ -104,18 +104,3 @@ resource "digitalocean_firewall" "web" {
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 }
-
-resource "digitalocean_firewall" "usage" {
-  name        = "usage"
-  droplet_ids = [digitalocean_droplet.usage_jenkins_io.id]
-
-  # Allow ssh connexion from old usage VM (in CloudBees AWS) for migration
-  inbound_rule {
-    protocol   = "tcp"
-    port_range = "22"
-
-    source_addresses = flatten(concat(
-      split(" ", local.inbound_ips_usage_legacy),
-    ))
-  }
-}
