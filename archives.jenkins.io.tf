@@ -7,7 +7,7 @@ resource "digitalocean_ssh_key" "archives_jenkins_io" {
 resource "digitalocean_volume" "archives_jenkins_io_data" {
   region                  = var.region
   name                    = "archivesjenkinsiodata" # Only lowercase alphanum
-  size                    = 750
+  size                    = 800
   initial_filesystem_type = "ext4"
   description             = "Data disk for archives.jenkins.io"
 }
