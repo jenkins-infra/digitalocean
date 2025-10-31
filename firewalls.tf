@@ -111,7 +111,7 @@ resource "digitalocean_firewall" "web" {
 
 
 resource "digitalocean_firewall" "census" {
-  name        = "web"
+  name        = "census"
   droplet_ids = [digitalocean_droplet.census_jenkins_io.id]
 
   # Allow access from/to the old census VM
