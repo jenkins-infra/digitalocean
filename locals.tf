@@ -16,6 +16,9 @@ locals {
   archives_jenkins_io_vmname = "archives"
   archives_jenkins_io_fqdn   = "${local.archives_jenkins_io_vmname}.${digitalocean_domain.do_jenkins_io.name}"
 
+  census_jenkins_io_vmname = "census"
+  census_jenkins_io_fqdn   = "${local.census_jenkins_io_vmname}.${digitalocean_domain.do_jenkins_io.name}"
+
   # Tracked by 'updatecli' from the following source: https://reports.jenkins.io/jenkins-infra-data-reports/azure-net.json
   outbound_ips_private_vpn_jenkins_io = "52.232.183.117"
   # Tracked by 'updatecli' from the following source: https://reports.jenkins.io/jenkins-infra-data-reports/azure-net.json
@@ -26,6 +29,8 @@ locals {
   inbound_ips_pkg_origin_jenkins_io = "52.202.51.185"
   # TODO: track with updatecli
   outbound_ips_pkg_origin_jenkins_io = "52.202.51.185"
+  # TODO: delete once the old VM is deleted
+  outbound_ips_census_aws_jenkins_io = "52.202.38.86"
   # TODO: track with updatecli
   inbound_ips_ftp_osl_osuosl_org = "140.211.166.134 2605:bc80:3010::134"
 }
