@@ -29,8 +29,6 @@ locals {
   inbound_ips_pkg_origin_jenkins_io = "52.202.51.185"
   # TODO: track with updatecli
   outbound_ips_pkg_origin_jenkins_io = "52.202.51.185"
-  # TODO: delete once the old VM is deleted
-  outbound_ips_census_aws_jenkins_io = "52.202.38.86"
   # TODO: track with updatecli
   inbound_ips_ftp_osl_osuosl_org = "140.211.166.134 2605:bc80:3010::134"
 }

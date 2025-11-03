@@ -114,18 +114,6 @@ resource "digitalocean_firewall" "census" {
   name        = "census"
   droplet_ids = [digitalocean_droplet.census_jenkins_io.id]
 
-  # Allow access from/to the old census VM
-  inbound_rule {
-    protocol         = "tcp"
-    port_range       = "22"
-    source_addresses = [local.outbound_ips_census_aws_jenkins_io]
-  }
-  outbound_rule {
-    protocol              = "tcp"
-    port_range            = "22"
-    destination_addresses = [local.outbound_ips_census_aws_jenkins_io]
-  }
-
   # Allow SSH access from trusted.ci.jenkins.io
   inbound_rule {
     protocol         = "tcp"
