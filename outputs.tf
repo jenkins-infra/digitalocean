@@ -30,6 +30,17 @@ resource "local_file" "jenkins_infra_data_report" {
         "ipv6" = digitalocean_droplet.usage_jenkins_io.ipv6_address,
       },
     },
+    "census.jenkins.io" = {
+      "vm_dns_name" = local.census_jenkins_io_fqdn,
+      "service_ips" = {
+        "ipv4" = digitalocean_droplet.census_jenkins_io.ipv4_address,
+        "ipv6" = digitalocean_droplet.census_jenkins_io.ipv6_address,
+      },
+      "outbound_ips" = {
+        "ipv4" = digitalocean_droplet.census_jenkins_io.ipv4_address,
+        "ipv6" = digitalocean_droplet.census_jenkins_io.ipv6_address,
+      },
+    },
   })
   filename = "${path.module}/jenkins-infra-data-reports/digitalocean.json"
 }
