@@ -32,3 +32,17 @@ resource "digitalocean_record" "usage_ipv6" {
   name   = local.usage_jenkins_io_vmname
   value  = digitalocean_droplet.usage_jenkins_io.ipv6_address
 }
+
+resource "digitalocean_record" "census_ipv4" {
+  domain = digitalocean_domain.do_jenkins_io.id
+  type   = "A"
+  name   = local.census_jenkins_io_vmname
+  value  = digitalocean_droplet.census_jenkins_io.ipv4_address
+}
+
+resource "digitalocean_record" "census_ipv6" {
+  domain = digitalocean_domain.do_jenkins_io.id
+  type   = "AAAA"
+  name   = local.census_jenkins_io_vmname
+  value  = digitalocean_droplet.census_jenkins_io.ipv6_address
+}
