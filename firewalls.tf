@@ -56,7 +56,6 @@ resource "digitalocean_firewall" "archives" {
     port_range = "22"
 
     source_addresses = flatten(concat(
-      split(" ", local.outbound_ips_pkg_origin_jenkins_io),  # Data sync script from the `pkg` VM
       split(" ", local.outbound_ips_trusted_ci_jenkins_io),  # trusted.ci.jenkins.io (controller and all agents) for rsync data transfer
       split(" ", local.outbound_ips_private_vpn_jenkins_io), # connections routed through the VPN
       split(" ", local.outbound_ips_infra_ci_jenkins_io),    # infra.ci.jenkins.io (controller and all agents) for SSH management
@@ -71,13 +70,12 @@ resource "digitalocean_firewall" "archives" {
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 
-  ## Allow rsyncing to OSUOSL and pkg.jenkins.io
+  ## Allow rsyncing to OSUOSL
   outbound_rule {
     protocol   = "tcp"
     port_range = "873"
     destination_addresses = flatten(concat(
       split(" ", local.inbound_ips_ftp_osl_osuosl_org),
-      split(" ", local.inbound_ips_pkg_origin_jenkins_io),
     ))
   }
   outbound_rule {
@@ -85,7 +83,6 @@ resource "digitalocean_firewall" "archives" {
     port_range = "22"
     destination_addresses = flatten(concat(
       split(" ", local.inbound_ips_ftp_osl_osuosl_org),
-      split(" ", local.inbound_ips_pkg_origin_jenkins_io),
     ))
   }
 }
