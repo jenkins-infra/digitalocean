@@ -106,7 +106,6 @@ resource "digitalocean_firewall" "web" {
   }
 }
 
-
 resource "digitalocean_firewall" "census" {
   name        = "census"
   droplet_ids = [digitalocean_droplet.census_jenkins_io.id]
@@ -115,6 +114,6 @@ resource "digitalocean_firewall" "census" {
   inbound_rule {
     protocol         = "tcp"
     port_range       = "22"
-    source_addresses = [local.outbound_ips_trusted_ci_jenkins_io]
+    source_addresses = split(" ", local.outbound_ips_trusted_ci_jenkins_io)
   }
 }
