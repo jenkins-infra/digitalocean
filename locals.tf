@@ -24,7 +24,7 @@ locals {
   # Tracked by 'updatecli' from the following source: https://reports.jenkins.io/jenkins-infra-data-reports/azure-net.json
   outbound_ips_trusted_ci_jenkins_io = "104.209.128.236 20.110.255.213"
   # Tracked by 'updatecli' from the following source: https://reports.jenkins.io/jenkins-infra-data-reports/azure-net.json
-  outbound_ips_infra_ci_jenkins_io = "20.57.120.46 52.179.141.53 172.210.200.59 20.10.193.4 20.97.161.208 52.251.34.201"
+  outbound_ips_infra_ci_jenkins_io = "20.57.120.46 52.179.141.53 20.97.161.208 52.251.34.201"
   # TODO: track with updatecli
   inbound_ips_ftp_osl_osuosl_org = "140.211.166.134 2605:bc80:3010::134"
 }
