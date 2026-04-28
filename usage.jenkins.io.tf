@@ -29,4 +29,14 @@ resource "digitalocean_droplet" "usage_jenkins_io" {
   ssh_keys  = [digitalocean_ssh_key.usage_jenkins_io.fingerprint]
   user_data = templatefile("${path.root}/cloudinit/usage-cloudinit.tftpl", { hostname = local.usage_jenkins_io_fqdn })
   tags      = concat([for key, value in local.default_tags : "${key}:${value}"], ["usage_jenkins_io"])
+
+  lifecycle {
+    ignore_changes = [
+      # https://github.com/digitalocean/terraform-provider-digitalocean/pull/1515 (introduced with https://github.com/digitalocean/terraform-provider-digitalocean/releases/tag/v2.82.0)
+      # introduced a regression around public_networking. Let's ignore changes to this attribute to avoid droplet destruction until https://github.com/digitalocean/terraform-provider-digitalocean/issues/1524 is fixed.
+      public_networking,
+      # Also ignoring user_data in case we make unwanted changes to the tpl file (which could lead to destroying a droplet inadvertently).
+      user_data,
+    ]
+  }
 }
