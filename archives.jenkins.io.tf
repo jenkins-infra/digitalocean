@@ -26,9 +26,12 @@ resource "digitalocean_droplet" "archives_jenkins_io" {
   ipv6        = true
   resize_disk = true
   # default username is root - https://docs.digitalocean.com/products/droplets/how-to/connect-with-ssh/
-  ssh_keys  = [digitalocean_ssh_key.archives_jenkins_io.fingerprint]
-  user_data = templatefile("${path.root}/cloudinit.tftpl", { hostname = local.archives_jenkins_io_fqdn })
-  tags      = concat([for key, value in local.default_tags : "${key}:${value}"])
+  ssh_keys = [digitalocean_ssh_key.archives_jenkins_io.fingerprint]
+  user_data = templatefile("./.shared-tools/terraform/cloudinit.tftpl", {
+    hostname       = local.archives_jenkins_io_fqdn,
+    admin_username = "root", # comment for ssh_keys about root user
+  })
+  tags = concat([for key, value in local.default_tags : "${key}:${value}"])
 
   lifecycle {
     ignore_changes = [
