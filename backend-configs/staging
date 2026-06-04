@@ -1,0 +1,5 @@
+resource_group_name  = "tf-remote-state-digitalocean-staging-L8Jkg3"
+storage_account_name = "digitaloceanstagil8jkg3"
+container_name       = "digitaloceanstagil8jkg3"
+client_id            = "218f8a9d-000b-45d3-bd95-2d44327f2d25"
+# client_secret      = "" # Specified through the env. variable $TF_BACKEND_ARM_CLIENT_SECRET

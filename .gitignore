@@ -5,9 +5,6 @@
 **.tfstate
 **.tfstate.*
 
-# # Backend config
-backend-config
-
 # Crash log files
 crash.log
 

@@ -2,11 +2,11 @@ terraform(
   cronTriggerExpression: env.BRANCH_IS_PRIMARY ? '@daily' : '',
   stagingCredentials: [
     string(variable: 'DIGITALOCEAN_ACCESS_TOKEN', credentialsId:'staging-terraform-digitalocean-pat'),
-    file(variable: 'BACKEND_CONFIG_FILE', credentialsId: 'staging-terraform-digitalocean-backend-config'),
+    string(variable: 'TF_BACKEND_ARM_CLIENT_SECRET', credentialsId:'staging-terraform-digitalocean-backend-config-arm-secret'),
   ],
   productionCredentials: [
     string(variable: 'DIGITALOCEAN_ACCESS_TOKEN', credentialsId:'production-terraform-digitalocean-pat'),
-    file(variable: 'BACKEND_CONFIG_FILE', credentialsId: 'production-terraform-digitalocean-backend-config'),
+    string(variable: 'TF_BACKEND_ARM_CLIENT_SECRET', credentialsId:'production-terraform-digitalocean-backend-config-arm-secret'),
   ],
   publishReports: ['jenkins-infra-data-reports/digitalocean.json'],
 )
