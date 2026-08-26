@@ -116,4 +116,29 @@ resource "digitalocean_firewall" "census" {
     port_range       = "22"
     source_addresses = split(" ", local.outbound_ips_trusted_ci_jenkins_io)
   }
+
+  ## Allow SSH to usage to retrieve data
+  outbound_rule {
+    protocol   = "tcp"
+    port_range = "22"
+    destination_addresses = [
+      "${digitalocean_droplet.usage_jenkins_io.ipv4_address}/32",
+      "${digitalocean_droplet.usage_jenkins_io.ipv6_address}/32",
+    ]
+  }
+}
+
+resource "digitalocean_firewall" "usage" {
+  name        = "census"
+  droplet_ids = [digitalocean_droplet.usage_jenkins_io.id]
+
+  # Allow SSH access from census.jenkins.io
+  inbound_rule {
+    protocol   = "tcp"
+    port_range = "22"
+    source_addresses = [
+      "${digitalocean_droplet.census_jenkins_io.ipv4_address}/32",
+      "${digitalocean_droplet.census_jenkins_io.ipv6_address}/32",
+    ]
+  }
 }
