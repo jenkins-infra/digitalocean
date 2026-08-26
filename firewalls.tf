@@ -129,7 +129,7 @@ resource "digitalocean_firewall" "census" {
 }
 
 resource "digitalocean_firewall" "usage" {
-  name        = "census"
+  name        = "usage"
   droplet_ids = [digitalocean_droplet.usage_jenkins_io.id]
 
   # Allow SSH access from census.jenkins.io
