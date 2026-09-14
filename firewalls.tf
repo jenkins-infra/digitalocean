@@ -45,6 +45,18 @@ resource "digitalocean_firewall" "default" {
     port_range            = "8140"
     destination_addresses = ["20.12.27.65/32"] # todo updatecli this ip
   }
+
+  # Allow reaching for GPG public keys through HKP (OpenPGP KeyServer) - https://github.com/jenkins-infra/helpdesk/issues/3664
+  outbound_rule {
+    protocol              = "tcp"
+    port_range            = "11371"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+  outbound_rule {
+    protocol              = "udp"
+    port_range            = "11371"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
 }
 
 resource "digitalocean_firewall" "archives" {
