@@ -21,7 +21,7 @@ resource "digitalocean_droplet" "census_jenkins_io" {
   image       = "ubuntu-22-04-x64"
   name        = local.census_jenkins_io_vmname
   region      = var.region
-  size        = "s-2vcpu-4gb"
+  size        = "s-2vcpu-8gb-amd"
   monitoring  = true
   ipv6        = true
   resize_disk = true
